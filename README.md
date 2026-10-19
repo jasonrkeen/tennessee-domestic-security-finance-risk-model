@@ -3,7 +3,7 @@
 **County-level OSINT model for illicit-finance vulnerability, cash-economy exposure, tactical-access indicators, organized/group criminal activity indicators, explosive-use indicators, targeted-harm indicators, public-safety personnel pressure, disaster/disruption vulnerability, institutional/enforcement pressure, operational-risk / protective-planning context, public group / network reference context, TDOC correctional-system STG context, statewide hate-crime context, political violence / civil unrest exposure, and domestic security risk in Tennessee.**
 
 Prepared by **Jason Keen**  
-Contact: **keenjasonr@gmail.com**
+Contact: **[LinkedIn](https://www.linkedin.com/in/jason-keen-1887b4218)**
 
 ---
 
