@@ -128,7 +128,6 @@ def load_optional_political_violence_inputs(county_base: pd.DataFrame) -> pd.Dat
 
     if OPTIONAL_POLITICAL_VIOLENCE_INPUT.exists():
         df = pd.read_csv(OPTIONAL_POLITICAL_VIOLENCE_INPUT)
-        evidence = county_availability(df, expected_cols, "political_violence_data_available")
 
         # Backward compatibility:
         # If an older file has extremism_related_event_count but not
@@ -148,6 +147,9 @@ def load_optional_political_violence_inputs(county_base: pd.DataFrame) -> pd.Dat
             and "threat_incident_count" in df.columns
         ):
             df["strategic_development_count"] = df["threat_incident_count"]
+
+        # Aliases carry real input values; capture after mapping but before defaults.
+        evidence = county_availability(df, expected_cols, "political_violence_data_available")
 
         for col in expected_cols:
             if col not in df.columns:

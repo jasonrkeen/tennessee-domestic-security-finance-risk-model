@@ -66,6 +66,7 @@ def test_explicit_flags_and_csv_round_trip():
 def test_complete_sources_count_once_and_verified_crime_zero(socioeconomic):
     # The score frame supplies all numeric fields; affirm their synthetic provenance.
     frame = risk_scoring.build_scores(socioeconomic)
+    frame["crime_population_2024"] = frame["population"]
     for col in frame.columns:
         if col.endswith("_data_available"):
             frame[col] = True
@@ -104,6 +105,8 @@ def test_optional_loader_evidence(monkeypatch, tmp_path, socioeconomic, module_n
 
     # A reviewed zero for A, an unverified zero for B, and an absent county C.
     source = missing.iloc[:2].copy()
+    if layer == "crime_rate":
+        source["crime_population_2024"] = 10000
     source[flag] = [True, False]
     source.to_csv(path, index=False)
     result = loader(socioeconomic).set_index("county")
@@ -117,7 +120,9 @@ def test_optional_loader_evidence(monkeypatch, tmp_path, socioeconomic, module_n
     assert not bool(scored.loc["Synthetic C", flag])
 
     # Legacy all-zero files carry no reliable distinction from old templates.
-    source.drop(columns=flag).to_csv(path, index=False)
+    legacy_zero = source.drop(columns=flag).copy()
+    legacy_zero.loc[:, legacy_zero.columns != "county"] = 0
+    legacy_zero.to_csv(path, index=False)
     assert not loader(socioeconomic)[flag].any()
 
     # Even an explicit marker cannot validate a missing field or an invalid row.
@@ -184,3 +189,80 @@ def test_master_pipeline_keeps_missingness_across_reruns(monkeypatch, tmp_path, 
         assert result["active_source_count"].eq(1).all()
         assert result["model_confidence"].eq("Low").all()
         assert not result["crime_true_zero_selected_categories"].any()
+
+
+@pytest.mark.parametrize("dtype", ["Int64", "Float64"])
+@pytest.mark.parametrize("marker", [True, None])
+def test_nullable_missing_cell_is_not_skipped(dtype, marker):
+    frame = pd.DataFrame({"a": pd.Series([1], dtype=dtype), "b": pd.Series([pd.NA], dtype=dtype)})
+    if marker is not None:
+        frame["test_data_available"] = marker
+    assert not observed_values(frame, ["a", "b"], "test_data_available").any()
+
+
+@pytest.mark.parametrize("denominator", ["population", "crime_population_2024"])
+def test_zero_denominator_is_unavailable(denominator):
+    frame = pd.DataFrame({denominator: [0], "count": [3], "test_data_available": [True]})
+    assert not observed_values(frame, [denominator, "count"], "test_data_available").any()
+
+
+def test_crime_rate_evidence_uses_actual_join_keys(monkeypatch, tmp_path, socioeconomic):
+    path = tmp_path / "rates.csv"
+    monkeypatch.setattr(data_collection, "OPTIONAL_CRIME_RATE_INPUT", path)
+    source = pd.DataFrame({
+        "county": ["Synthetic A County", "Synthetic B"],
+        "overall_crime_rate_per_1000_2024": [2, 3],
+        "overall_crime_count_2024": [20, 60],
+        "crime_population_2024": [10000, 20000],
+        "crime_rate_data_available": [True, True],
+    })
+    source.to_csv(path, index=False)
+    result = data_collection.load_optional_crime_rate_inputs(socioeconomic).set_index("county")
+    assert not bool(result.loc["Synthetic A", "crime_rate_data_available"])
+    assert bool(result.loc["Synthetic B", "crime_rate_data_available"])
+    # Preserve existing exact-match behavior instead of changing the scored data.
+    assert result.loc["Synthetic A", "overall_crime_count_2024"] == 0
+    assert result.loc["Synthetic B", "overall_crime_count_2024"] == 60
+
+
+def test_acled_legacy_aliases_keep_coverage(monkeypatch, tmp_path, socioeconomic):
+    from src import political_violence_inputs as module
+    path = tmp_path / "acled.csv"
+    monkeypatch.setattr(module, "OPTIONAL_POLITICAL_VIOLENCE_INPUT", path)
+    source = module.load_optional_political_violence_inputs(socioeconomic).iloc[:1].copy()
+    source["political_violence_data_available"] = True
+    source["political_violence_event_count"] = 2
+    source = source.rename(columns={"political_violence_event_count": "extremism_related_event_count", "strategic_development_count": "threat_incident_count"})
+    source.to_csv(path, index=False)
+    result = module.load_optional_political_violence_inputs(socioeconomic)
+    assert bool(result.iloc[0]["political_violence_data_available"])
+    assert result.iloc[0]["political_violence_event_count"] == 2
+
+
+@pytest.mark.parametrize("missing", ["fyDeclared", "incidentType", "declarationTitle"])
+def test_fema_partial_record_does_not_establish_coverage(monkeypatch, missing):
+    good = {"designatedArea": "Synthetic A County", "fyDeclared": 2024, "incidentType": "Flood", "declarationTitle": "Synthetic event"}
+    bad = {**good, "designatedArea": "Synthetic B County", missing: None}
+    monkeypatch.setattr(data_collection, "safe_get_json", lambda *a, **k: {"DisasterDeclarationsSummaries": [good, bad]})
+    result = data_collection.collect_fema_disaster_data().set_index("county")
+    assert bool(result.loc["Synthetic A", "fema_data_available"])
+    assert not bool(result.loc["Synthetic B", "fema_data_available"])
+
+
+def test_fema_page_limit_is_not_complete_coverage(monkeypatch):
+    row = {"designatedArea": "Synthetic A County", "fyDeclared": 2024, "incidentType": "Flood", "declarationTitle": "Synthetic event"}
+    monkeypatch.setattr(data_collection, "safe_get_json", lambda *a, **k: {"DisasterDeclarationsSummaries": [row] * 5000})
+    result = data_collection.collect_fema_disaster_data()
+    assert not result["fema_data_available"].any()
+    assert result.iloc[0]["disaster_declaration_count"] == 5000
+
+
+def test_acs_missing_component_not_hidden_by_sum(monkeypatch):
+    fields = list(data_collection.ACS_VARIABLES)
+    header = ["NAME"] + fields + ["state", "county"]
+    values = [10000, 60000, 10000, 1000, 5000, 200, 1000, None, 100, 100, 100]
+    row = ["Synthetic A County, Tennessee"] + values + ["47", "001"]
+    monkeypatch.setattr(data_collection, "safe_get_json", lambda *a, **k: [header, row])
+    result = data_collection.collect_acs_county_data()
+    assert result.iloc[0]["rent_burden_rate"] == .3  # unchanged sum behavior
+    assert not result["acs_data_available"].any()

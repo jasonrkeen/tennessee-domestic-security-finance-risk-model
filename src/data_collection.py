@@ -204,6 +204,11 @@ def collect_acs_county_data() -> pd.DataFrame:
             "unemployment_rate", "rent_burden_rate",
         ], "acs_data_available",
     )
+    # Ratios and sum() can hide missing/sentinel component values. Check the
+    # requested ACS fields too, before the master dataset fills them.
+    raw_coverage = observed_values(df, list(ACS_VARIABLES.values()), "acs_data_available")
+    raw_coverage &= df[["poverty_universe", "labor_force", "renter_households"]].gt(0).all(axis=1)
+    output["acs_data_available"] &= raw_coverage
     output["acs_year"] = successful_year
 
     output.to_csv(PROCESSED_DIR / "tn_acs_county_data.csv", index=False)
@@ -409,8 +414,15 @@ def collect_fema_disaster_data() -> pd.DataFrame:
             )
         )
 
-    # A failed/empty retrieval is not evidence of zero county exposure.
-    agg["fema_data_available"] = not df.empty
+    # Validate the fields used by the existing aggregates without changing counts.
+    # A full first page may be truncated: it cannot establish complete coverage.
+    agg["fema_data_available"] = False
+    if not df.empty and len(rows) < params["$top"]:
+        valid = df["fy_declared"].gt(0) & df["fy_declared"].lt(float("inf"))
+        for field in ("incident_type", "declaration_title"):
+            valid &= df[field].astype("string").str.strip().ne("").fillna(False)
+        evidence = valid.fillna(False).groupby(df["county"]).all()
+        agg["fema_data_available"] = agg["county"].map(evidence).eq(True)
     agg.to_csv(PROCESSED_DIR / "tn_fema_disaster_exposure.csv", index=False)
     return agg
 
@@ -484,7 +496,11 @@ def load_optional_crime_rate_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
 
     if OPTIONAL_CRIME_RATE_INPUT.exists():
         df = pd.read_csv(OPTIONAL_CRIME_RATE_INPUT)
-        evidence = county_availability(df, expected_cols, "crime_rate_data_available")
+        # This loader joins values on exact county strings. Evidence must use the
+        # same keys; normalizing evidence alone would validate unmatched zeros.
+        evidence = county_availability(
+            df, expected_cols, "crime_rate_data_available", normalize=False
+        )
 
         for col in expected_cols:
             if col not in df.columns:
@@ -526,7 +542,9 @@ def load_optional_crime_rate_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
         if col != "county":
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-    return attach_availability(df, evidence, "crime_rate_data_available")
+    return attach_availability(
+        df, evidence, "crime_rate_data_available", normalize=False
+    )
 
 
 def build_source_register() -> pd.DataFrame:

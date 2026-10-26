@@ -11,6 +11,8 @@ Their old confidence labels should not be treated as corrected results.
   aggregate duplicate counties, or fill unmatched county rows.
 - All expected numeric fields in an input layer must be finite, nonnegative,
   and present for that county. Partial input is not complete layer coverage.
+  Nullable `pd.NA` cells are missing, not skipped during completeness checks.
+  Population denominators must be strictly positive.
 - A layer-specific `*_data_available` boolean is carried in master CSVs and
   respected by scoring. False, blank, and unrecognized markers are unavailable.
 - Newly created zero templates have an explicit false marker. Re-reading the
@@ -25,6 +27,13 @@ Their old confidence labels should not be treated as corrected results.
   require source review; this patch cannot recover that lost evidence.
 - API collection records coverage separately: failed/empty FEMA retrieval and
   incomplete CBP category retrieval do not become observed zero exposure.
+  FEMA records must contain the year, incident type, and declaration title used
+  by the existing aggregates. A first page at the request limit is unverified.
+  ACS coverage also checks raw components, so sums/ratios cannot hide missing data.
+- Availability uses the same county keys as the value join. The existing exact
+  county-name join in the crime-rate loader is preserved; unmatched values cannot
+  acquire coverage solely because an evidence key was normalized.
+- Supported legacy ACLED aliases are mapped before availability is captured.
 
 Completeness counts 14 input layers. Targeted-harm and institutional composites
 retain diagnostic flags based on their dependencies, but do not add independent
@@ -49,3 +58,23 @@ Tests use synthetic data, mock API responses, and redirect outputs to temporary
 directories. They cover missing files, repeated template reads, partial schemas,
 invalid values, explicit observed zeros, absent counties, duplicate rows, CSV
 round trips, API failure, and master assembly. No live data refresh is required.
+
+## Follow-up review
+
+The expanded suite has 38 passing tests, including nullable missing cells, invalid
+population denominators, county-key mismatches, legacy aliases, incomplete FEMA
+records, a potentially truncated FEMA page, and missing ACS component values.
+
+Frozen expectations from base commit
+`bb6f0b5f7955c09b36db66202e77d29ed3c7d9ad` verify 374 non-quality fields across
+three five-county synthetic cases. All ten weighting scenarios, rank-stability
+results, and non-quality projections of all nine emitted county score tables
+match the base within 1e-12. Coverage/confidence metadata is intentionally changed.
+The fixture provenance is documented in `tests/fixtures/README.md`.
+
+All eight saved dashboard images and `docs/sample_report.pdf` retain their base
+Git blob hashes. The Windows PDF checkout has Git's pre-existing CRLF conversion;
+its bytes match `git cat-file --filters` for the base revision. The stored PDF
+SHA-256 remains `b060d313b51244eca5ecf064315186fa7f8345ef0878dd60831a1e52234f9ab3`.
+No existing data/output artifacts were regenerated. This verifies saved-artifact
+preservation and synthetic numerical parity, not a rerun of unavailable live data.
