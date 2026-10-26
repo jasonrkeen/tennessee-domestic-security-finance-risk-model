@@ -2,6 +2,8 @@ import re
 
 import pandas as pd
 
+from src.source_availability import county_availability, attach_availability
+
 from src.config import OPTIONAL_DISASTER_DISRUPTION_INPUT
 
 
@@ -139,6 +141,7 @@ def load_optional_disaster_disruption_inputs(
 
     if OPTIONAL_DISASTER_DISRUPTION_INPUT.exists():
         df = pd.read_csv(OPTIONAL_DISASTER_DISRUPTION_INPUT)
+        evidence = county_availability(df, expected_cols, "disaster_disruption_data_available")
 
         for col in expected_cols:
             if col not in df.columns:
@@ -153,6 +156,7 @@ def load_optional_disaster_disruption_inputs(
         )
 
     else:
+        evidence = pd.Series(dtype=bool)
         df = county_base[["county"]].copy()
 
         for col in expected_cols:
@@ -160,6 +164,7 @@ def load_optional_disaster_disruption_inputs(
                 df[col] = 0
 
         OPTIONAL_DISASTER_DISRUPTION_INPUT.parent.mkdir(parents=True, exist_ok=True)
+        df["disaster_disruption_data_available"] = False
         df.to_csv(OPTIONAL_DISASTER_DISRUPTION_INPUT, index=False)
 
     for col in expected_cols:
@@ -198,4 +203,4 @@ def load_optional_disaster_disruption_inputs(
         if col != "county":
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-    return df
+    return attach_availability(df, evidence, "disaster_disruption_data_available")

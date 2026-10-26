@@ -1,6 +1,12 @@
 import pandas as pd
 import requests
 
+from src.source_availability import (
+    attach_availability,
+    county_availability,
+    observed_values,
+)
+
 from src.config import (
     ACS_YEAR,
     ACS_VARIABLES,
@@ -192,6 +198,17 @@ def collect_acs_county_data() -> pd.DataFrame:
     ]
 
     output = df[keep_cols].copy()
+    output["acs_data_available"] = observed_values(
+        output, [
+            "population", "median_household_income", "poverty_rate",
+            "unemployment_rate", "rent_burden_rate",
+        ], "acs_data_available",
+    )
+    # Ratios and sum() can hide missing/sentinel component values. Check the
+    # requested ACS fields too, before the master dataset fills them.
+    raw_coverage = observed_values(df, list(ACS_VARIABLES.values()), "acs_data_available")
+    raw_coverage &= df[["poverty_universe", "labor_force", "renter_households"]].gt(0).all(axis=1)
+    output["acs_data_available"] &= raw_coverage
     output["acs_year"] = successful_year
 
     output.to_csv(PROCESSED_DIR / "tn_acs_county_data.csv", index=False)
@@ -245,6 +262,7 @@ def collect_cbp_business_exposure() -> pd.DataFrame:
     """
 
     frames = []
+    coverage = []
 
     for naics_code, output_col in CBP_INDUSTRIES.items():
         print(f"Trying CBP industry {naics_code} -> {output_col}...")
@@ -263,6 +281,12 @@ def collect_cbp_business_exposure() -> pd.DataFrame:
             continue
 
         industry_df = industry_df.rename(columns={"ESTAB": output_col})
+        raw_values = pd.to_numeric(industry_df[output_col], errors="coerce")
+        coverage.append(pd.Series(
+            (raw_values.notna() & raw_values.ge(0) & raw_values.lt(float("inf"))).to_numpy(),
+            index=industry_df["state"] + industry_df["county"],
+            name=output_col,
+        ))
         industry_df[output_col] = (
             pd.to_numeric(industry_df[output_col], errors="coerce")
             .fillna(0)
@@ -287,7 +311,7 @@ def collect_cbp_business_exposure() -> pd.DataFrame:
             "\nWarning: No CBP industry data could be collected. "
             "The pipeline will continue with zero-filled business exposure columns."
         )
-        return pd.DataFrame(columns=["fips"] + list(CBP_INDUSTRIES.values()))
+        return pd.DataFrame(columns=["fips", "cbp_data_available"] + list(CBP_INDUSTRIES.values()))
 
     merged = None
 
@@ -300,6 +324,8 @@ def collect_cbp_business_exposure() -> pd.DataFrame:
         else:
             merged = merged.merge(frame[cols], on="fips", how="outer")
 
+    coverage_frame = pd.concat(coverage, axis=1).reindex(columns=list(CBP_INDUSTRIES.values()))
+    merged["cbp_data_available"] = merged["fips"].map(coverage_frame.eq(True).all(axis=1)).eq(True)
     merged = merged.fillna(0)
 
     for col in CBP_INDUSTRIES.values():
@@ -388,6 +414,15 @@ def collect_fema_disaster_data() -> pd.DataFrame:
             )
         )
 
+    # Validate the fields used by the existing aggregates without changing counts.
+    # A full first page may be truncated: it cannot establish complete coverage.
+    agg["fema_data_available"] = False
+    if not df.empty and len(rows) < params["$top"]:
+        valid = df["fy_declared"].gt(0) & df["fy_declared"].lt(float("inf"))
+        for field in ("incident_type", "declaration_title"):
+            valid &= df[field].astype("string").str.strip().ne("").fillna(False)
+        evidence = valid.fillna(False).groupby(df["county"]).all()
+        agg["fema_data_available"] = agg["county"].map(evidence).eq(True)
     agg.to_csv(PROCESSED_DIR / "tn_fema_disaster_exposure.csv", index=False)
     return agg
 
@@ -461,6 +496,11 @@ def load_optional_crime_rate_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
 
     if OPTIONAL_CRIME_RATE_INPUT.exists():
         df = pd.read_csv(OPTIONAL_CRIME_RATE_INPUT)
+        # This loader joins values on exact county strings. Evidence must use the
+        # same keys; normalizing evidence alone would validate unmatched zeros.
+        evidence = county_availability(
+            df, expected_cols, "crime_rate_data_available", normalize=False
+        )
 
         for col in expected_cols:
             if col not in df.columns:
@@ -469,6 +509,7 @@ def load_optional_crime_rate_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
         df = df[expected_cols].copy()
 
     else:
+        evidence = pd.Series(dtype=bool)
         df = county_base[["county"]].copy()
 
         for col in expected_cols:
@@ -476,6 +517,7 @@ def load_optional_crime_rate_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
                 df[col] = 0
 
         OPTIONAL_CRIME_RATE_INPUT.parent.mkdir(parents=True, exist_ok=True)
+        df["crime_rate_data_available"] = False
         df.to_csv(OPTIONAL_CRIME_RATE_INPUT, index=False)
 
     for col in expected_cols:
@@ -500,7 +542,9 @@ def load_optional_crime_rate_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
         if col != "county":
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-    return df
+    return attach_availability(
+        df, evidence, "crime_rate_data_available", normalize=False
+    )
 
 
 def build_source_register() -> pd.DataFrame:

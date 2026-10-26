@@ -1,39 +1,7 @@
 import pandas as pd
 
 from src.config import TABLES_DIR
-
-
-def _has_positive_value(df: pd.DataFrame, columns: list[str]) -> pd.Series:
-    """
-    Return True if any supplied column has a positive numeric value.
-
-    Useful for sources where zero generally means missing or zero-filled input.
-    """
-
-    existing_cols = [col for col in columns if col in df.columns]
-
-    if not existing_cols:
-        return pd.Series(False, index=df.index)
-
-    numeric = df[existing_cols].apply(pd.to_numeric, errors="coerce").fillna(0)
-
-    return numeric.gt(0).any(axis=1)
-
-
-def _has_columns_present(df: pd.DataFrame, columns: list[str]) -> pd.Series:
-    """
-    Return True if at least one expected source column exists.
-
-    This is useful for sources where a valid county can have true zero values
-    in selected categories. In that case, zero is not necessarily missing data.
-    """
-
-    existing_cols = [col for col in columns if col in df.columns]
-
-    if not existing_cols:
-        return pd.Series(False, index=df.index)
-
-    return pd.Series(True, index=df.index)
+from src.source_availability import observed_values
 
 
 def _selected_total(df: pd.DataFrame, columns: list[str]) -> pd.Series:
@@ -54,7 +22,9 @@ def _selected_total(df: pd.DataFrame, columns: list[str]) -> pd.Series:
     )
 
 
-def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
+def add_data_quality_flags(
+    df: pd.DataFrame, source_df: pd.DataFrame | None = None
+) -> pd.DataFrame:
     """
     Add county-level data availability and completeness indicators.
 
@@ -65,10 +35,12 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     Notes:
     - Data completeness measures source coverage, not risk.
     - Many TBI and ACLED layers can be valid true-zero layers.
-    - Institutional / enforcement pressure is now an active derived layer.
+    - Derived layers do not contribute to the coverage denominator.
+    - Pass pre-imputation source_df when scoring has filled numeric values.
     """
 
     output = df.copy()
+    source = df if source_df is None else source_df
 
     # ------------------------------------------------------------------
     # Expected source-layer columns
@@ -252,57 +224,35 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     # ------------------------------------------------------------------
     # Source availability flags
     # ------------------------------------------------------------------
-    output["acs_data_available"] = _has_positive_value(output, acs_cols)
+    source_columns = {
+        "acs_data_available": acs_cols,
+        "cbp_data_available": cbp_cols,
+        "fdic_data_available": fdic_cols,
+        "ffl_data_available": ffl_cols,
+        "fema_data_available": fema_cols,
+        "disaster_disruption_data_available": disaster_disruption_cols,
+        "crime_data_available": crime_cols,
+        "crime_rate_data_available": crime_rate_cols,
+        "political_violence_data_available": political_violence_cols,
+        "gang_activity_data_available": gang_cols,
+        "explosives_activity_data_available": explosives_cols,
+        "gang_explosives_activity_data_available": gang_explosives_cols,
+        "hate_crime_offense_data_available": hate_crime_offense_cols,
+        "law_enforcement_ambush_data_available": law_enforcement_ambush_cols,
+    }
+    for flag, columns in source_columns.items():
+        output[flag] = observed_values(source, columns, flag)
 
-    # CBP can legitimately be zero in smaller counties for selected NAICS.
-    output["cbp_data_available"] = _has_columns_present(output, cbp_cols)
-
-    output["fdic_data_available"] = _has_positive_value(output, fdic_cols)
-    output["ffl_data_available"] = _has_positive_value(output, ffl_cols)
-    output["fema_data_available"] = _has_positive_value(output, fema_cols)
-
-    # Phase 6 optional disaster/disruption fields may be valid true-zero fields.
-    output["disaster_disruption_data_available"] = _has_columns_present(
-        output,
-        disaster_disruption_cols,
-    )
-
-    # TBI / ACLED layers can legitimately be zero for some counties/categories.
-    # Treat as available if expected columns exist, then use true-zero diagnostics.
-    output["crime_data_available"] = _has_columns_present(output, crime_cols)
-    output["crime_rate_data_available"] = _has_columns_present(output, crime_rate_cols)
-    output["political_violence_data_available"] = _has_columns_present(
-        output,
-        political_violence_cols,
-    )
-    output["gang_activity_data_available"] = _has_columns_present(output, gang_cols)
-    output["explosives_activity_data_available"] = _has_columns_present(
-        output,
-        explosives_cols,
-    )
-    output["gang_explosives_activity_data_available"] = _has_columns_present(
-        output,
-        gang_explosives_cols,
-    )
-    output["hate_crime_offense_data_available"] = _has_columns_present(
-        output,
-        hate_crime_offense_cols,
-    )
-    output["law_enforcement_ambush_data_available"] = _has_columns_present(
-        output,
-        law_enforcement_ambush_cols,
-    )
+    # Derived layers cannot manufacture independent source coverage.
     output["targeted_harm_public_safety_data_available"] = (
-        _has_columns_present(output, targeted_harm_public_safety_cols)
-        | output["hate_crime_offense_data_available"]
-        | output["law_enforcement_ambush_data_available"]
+        output["hate_crime_offense_data_available"]
+        & output["law_enforcement_ambush_data_available"]
     )
-
-    # Institutional / enforcement pressure is now an active derived layer.
-    output["institutional_data_available"] = _has_columns_present(
-        output,
-        institutional_cols,
-    )
+    output["institutional_data_available"] = output[[
+        "crime_data_available", "crime_rate_data_available",
+        "targeted_harm_public_safety_data_available", "fema_data_available",
+        "disaster_disruption_data_available",
+    ]].all(axis=1)
 
     # ------------------------------------------------------------------
     # Additional diagnostic fields
@@ -418,29 +368,8 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     # ------------------------------------------------------------------
     # Data completeness score
     # ------------------------------------------------------------------
-    # Active Phase 6 sources:
-    # ACS, CBP, FDIC, FFL, FEMA, disaster/disruption, TBI crime/weapons,
-    # TBI crime rate, ACLED, TBI gang activity, TBI explosives,
-    # TBI gang + explosives intersection, TBI hate crime, TBI law-enforcement
-    # ambush, targeted harm/public-safety, and institutional/enforcement.
-    active_flags = [
-        "acs_data_available",
-        "cbp_data_available",
-        "fdic_data_available",
-        "ffl_data_available",
-        "fema_data_available",
-        "disaster_disruption_data_available",
-        "crime_data_available",
-        "crime_rate_data_available",
-        "political_violence_data_available",
-        "gang_activity_data_available",
-        "explosives_activity_data_available",
-        "gang_explosives_activity_data_available",
-        "hate_crime_offense_data_available",
-        "law_enforcement_ambush_data_available",
-        "targeted_harm_public_safety_data_available",
-        "institutional_data_available",
-    ]
+    # Fourteen input layers; derived composites are diagnostics only.
+    active_flags = list(source_columns)
 
     output["active_source_count"] = output[active_flags].sum(axis=1)
 
@@ -545,7 +474,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_cbp_gap_flag"],
         "data_quality_note",
-    ] += "CBP business exposure columns missing. "
+    ] += "CBP business exposure inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["cbp_true_zero_selected_categories"],
@@ -575,17 +504,17 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_disaster_disruption_gap_flag"],
         "data_quality_note",
-    ] += "Phase 6 disaster/disruption columns missing. "
+    ] += "Phase 6 disaster/disruption inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["disaster_disruption_true_zero_selected_categories"],
         "data_quality_note",
-    ] += "Phase 6 disaster/disruption categories are zero; treated as true zero exposure or unpopulated optional input depending on source review. "
+    ] += "Phase 6 disaster/disruption categories are zero; confirmed as observed zero input. "
 
     output.loc[
         output["possible_crime_gap_flag"],
         "data_quality_note",
-    ] += "TBI CrimeInsight crime/weapons columns missing. "
+    ] += "TBI CrimeInsight crime/weapons inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["crime_true_zero_selected_categories"],
@@ -595,17 +524,17 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_crime_rate_gap_flag"],
         "data_quality_note",
-    ] += "TBI overall crime-rate columns missing. "
+    ] += "TBI overall crime-rate inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["crime_rate_true_zero_selected_categories"],
         "data_quality_note",
-    ] += "TBI overall crime-rate values are zero; treated as true zero or export-filter issue depending on source review. "
+    ] += "TBI overall crime-rate values are zero; confirmed as observed zero input. "
 
     output.loc[
         output["possible_political_violence_gap_flag"],
         "data_quality_note",
-    ] += "ACLED political violence / civil unrest columns missing. "
+    ] += "ACLED political violence / civil unrest inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["political_violence_true_zero_selected_categories"],
@@ -615,7 +544,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_gang_activity_gap_flag"],
         "data_quality_note",
-    ] += "TBI gang-related criminal activity columns missing. "
+    ] += "TBI gang-related criminal activity inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["gang_activity_true_zero_selected_categories"],
@@ -625,7 +554,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_explosives_activity_gap_flag"],
         "data_quality_note",
-    ] += "TBI explosive-use criminal activity columns missing. "
+    ] += "TBI explosive-use criminal activity inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["explosives_activity_true_zero_selected_categories"],
@@ -635,7 +564,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_gang_explosives_activity_gap_flag"],
         "data_quality_note",
-    ] += "TBI gang-related explosive-use criminal activity columns missing. "
+    ] += "TBI gang-related explosive-use criminal activity inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["gang_explosives_activity_true_zero_selected_categories"],
@@ -645,7 +574,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_hate_crime_offense_gap_flag"],
         "data_quality_note",
-    ] += "TBI hate-crime offense columns missing. "
+    ] += "TBI hate-crime offense inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["hate_crime_offense_true_zero_selected_categories"],
@@ -655,7 +584,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_law_enforcement_ambush_gap_flag"],
         "data_quality_note",
-    ] += "TBI law-enforcement ambush columns missing. "
+    ] += "TBI law-enforcement ambush inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["law_enforcement_ambush_true_zero_selected_categories"],
@@ -665,7 +594,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_targeted_harm_public_safety_gap_flag"],
         "data_quality_note",
-    ] += "Targeted harm / public-safety derived columns missing. "
+    ] += "Targeted harm / public-safety derived inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["targeted_harm_public_safety_true_zero_selected_categories"],
@@ -675,7 +604,7 @@ def add_data_quality_flags(df: pd.DataFrame) -> pd.DataFrame:
     output.loc[
         output["possible_institutional_gap_flag"],
         "data_quality_note",
-    ] += "Institutional / enforcement pressure columns missing. "
+    ] += "Institutional / enforcement pressure inputs missing, incomplete, or unverified. "
 
     output.loc[
         output["institutional_true_zero_selected_categories"],

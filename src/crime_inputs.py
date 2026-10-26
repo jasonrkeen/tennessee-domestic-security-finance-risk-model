@@ -2,6 +2,8 @@ import re
 
 import pandas as pd
 
+from src.source_availability import county_availability, attach_availability
+
 from src.config import (
     OPTIONAL_CRIME_WEAPONS_INPUT,
     OPTIONAL_GANG_ACTIVITY_INPUT,
@@ -118,6 +120,7 @@ def _load_optional_county_aggregate(
     input_path,
     expected_cols: list[str],
     source_name: str,
+    availability_flag: str,
 ) -> pd.DataFrame:
     """
     Generic loader for optional county-level aggregate inputs.
@@ -130,6 +133,7 @@ def _load_optional_county_aggregate(
 
     if input_path.exists():
         df = pd.read_csv(input_path)
+        evidence = county_availability(df, expected_cols, availability_flag)
 
         for col in expected_cols:
             if col not in df.columns:
@@ -144,6 +148,7 @@ def _load_optional_county_aggregate(
         )
 
     else:
+        evidence = pd.Series(dtype=bool)
         df = county_base[["county"]].copy()
 
         for col in expected_cols:
@@ -151,6 +156,7 @@ def _load_optional_county_aggregate(
                 df[col] = 0
 
         input_path.parent.mkdir(parents=True, exist_ok=True)
+        df[availability_flag] = False
         df.to_csv(input_path, index=False)
 
     for col in expected_cols:
@@ -175,7 +181,7 @@ def _load_optional_county_aggregate(
         if col != "county":
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-    return df
+    return attach_availability(df, evidence, availability_flag)
 
 
 def load_optional_crime_weapons_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
@@ -206,6 +212,7 @@ def load_optional_crime_weapons_inputs(county_base: pd.DataFrame) -> pd.DataFram
         input_path=OPTIONAL_CRIME_WEAPONS_INPUT,
         expected_cols=expected_cols,
         source_name="TBI CrimeInsight crime/weapons",
+        availability_flag="crime_data_available",
     )
 
 
@@ -244,6 +251,7 @@ def load_optional_gang_activity_inputs(county_base: pd.DataFrame) -> pd.DataFram
         input_path=OPTIONAL_GANG_ACTIVITY_INPUT,
         expected_cols=expected_cols,
         source_name="TBI gang-related criminal activity",
+        availability_flag="gang_activity_data_available",
     )
 
 
@@ -282,6 +290,7 @@ def load_optional_explosives_activity_inputs(county_base: pd.DataFrame) -> pd.Da
         input_path=OPTIONAL_EXPLOSIVES_ACTIVITY_INPUT,
         expected_cols=expected_cols,
         source_name="TBI explosive-use criminal activity",
+        availability_flag="explosives_activity_data_available",
     )
 
 
@@ -324,6 +333,7 @@ def load_optional_gang_explosives_activity_inputs(
         input_path=OPTIONAL_GANG_EXPLOSIVES_ACTIVITY_INPUT,
         expected_cols=expected_cols,
         source_name="TBI gang-related explosive-use criminal activity",
+        availability_flag="gang_explosives_activity_data_available",
     )
 
 
@@ -366,6 +376,7 @@ def load_optional_hate_crime_offense_inputs(
         input_path=OPTIONAL_HATE_CRIME_OFFENSE_INPUT,
         expected_cols=expected_cols,
         source_name="TBI hate-crime offense activity",
+        availability_flag="hate_crime_offense_data_available",
     )
 
 
@@ -408,4 +419,5 @@ def load_optional_law_enforcement_ambush_inputs(
         input_path=OPTIONAL_LAW_ENFORCEMENT_AMBUSH_INPUT,
         expected_cols=expected_cols,
         source_name="TBI law-enforcement ambush activity",
+        availability_flag="law_enforcement_ambush_data_available",
     )
