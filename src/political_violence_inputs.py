@@ -2,6 +2,8 @@ import re
 
 import pandas as pd
 
+from src.source_availability import county_availability, attach_availability
+
 from src.config import OPTIONAL_POLITICAL_VIOLENCE_INPUT
 
 
@@ -126,6 +128,7 @@ def load_optional_political_violence_inputs(county_base: pd.DataFrame) -> pd.Dat
 
     if OPTIONAL_POLITICAL_VIOLENCE_INPUT.exists():
         df = pd.read_csv(OPTIONAL_POLITICAL_VIOLENCE_INPUT)
+        evidence = county_availability(df, expected_cols, "political_violence_data_available")
 
         # Backward compatibility:
         # If an older file has extremism_related_event_count but not
@@ -159,6 +162,7 @@ def load_optional_political_violence_inputs(county_base: pd.DataFrame) -> pd.Dat
         )
 
     else:
+        evidence = pd.Series(dtype=bool)
         df = county_base[["county"]].copy()
 
         for col in expected_cols:
@@ -166,6 +170,7 @@ def load_optional_political_violence_inputs(county_base: pd.DataFrame) -> pd.Dat
                 df[col] = 0
 
         OPTIONAL_POLITICAL_VIOLENCE_INPUT.parent.mkdir(parents=True, exist_ok=True)
+        df["political_violence_data_available"] = False
         df.to_csv(OPTIONAL_POLITICAL_VIOLENCE_INPUT, index=False)
 
     for col in expected_cols:
@@ -195,4 +200,4 @@ def load_optional_political_violence_inputs(county_base: pd.DataFrame) -> pd.Dat
         if col != "county":
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-    return df
+    return attach_availability(df, evidence, "political_violence_data_available")

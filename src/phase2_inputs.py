@@ -2,6 +2,8 @@ import re
 
 import pandas as pd
 
+from src.source_availability import county_availability, attach_availability
+
 from src.config import (
     OPTIONAL_FDIC_BANKING_INPUT,
     OPTIONAL_FFL_INPUT,
@@ -140,6 +142,7 @@ def load_optional_fdic_banking_inputs(county_base: pd.DataFrame) -> pd.DataFrame
 
     if OPTIONAL_FDIC_BANKING_INPUT.exists():
         df = pd.read_csv(OPTIONAL_FDIC_BANKING_INPUT)
+        evidence = county_availability(df, expected_cols, "fdic_data_available")
 
         for col in expected_cols:
             if col not in df.columns:
@@ -154,6 +157,7 @@ def load_optional_fdic_banking_inputs(county_base: pd.DataFrame) -> pd.DataFrame
         )
 
     else:
+        evidence = pd.Series(dtype=bool)
         df = county_base[["county"]].copy()
 
         for col in expected_cols:
@@ -161,6 +165,7 @@ def load_optional_fdic_banking_inputs(county_base: pd.DataFrame) -> pd.DataFrame
                 df[col] = 0
 
         OPTIONAL_FDIC_BANKING_INPUT.parent.mkdir(parents=True, exist_ok=True)
+        df["fdic_data_available"] = False
         df.to_csv(OPTIONAL_FDIC_BANKING_INPUT, index=False)
 
     for col in expected_cols:
@@ -190,7 +195,7 @@ def load_optional_fdic_banking_inputs(county_base: pd.DataFrame) -> pd.DataFrame
         .astype(int)
     )
 
-    return df
+    return attach_availability(df, evidence, "fdic_data_available")
 
 
 def load_optional_ffl_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
@@ -231,6 +236,7 @@ def load_optional_ffl_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
 
     if OPTIONAL_FFL_INPUT.exists():
         df = pd.read_csv(OPTIONAL_FFL_INPUT)
+        evidence = county_availability(df, expected_cols, "ffl_data_available")
 
         for col in expected_cols:
             if col not in df.columns:
@@ -245,6 +251,7 @@ def load_optional_ffl_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
         )
 
     else:
+        evidence = pd.Series(dtype=bool)
         df = county_base[["county"]].copy()
 
         for col in expected_cols:
@@ -252,6 +259,7 @@ def load_optional_ffl_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
                 df[col] = 0
 
         OPTIONAL_FFL_INPUT.parent.mkdir(parents=True, exist_ok=True)
+        df["ffl_data_available"] = False
         df.to_csv(OPTIONAL_FFL_INPUT, index=False)
 
     for col in expected_cols:
@@ -290,4 +298,4 @@ def load_optional_ffl_inputs(county_base: pd.DataFrame) -> pd.DataFrame:
             .astype(int)
         )
 
-    return df
+    return attach_availability(df, evidence, "ffl_data_available")

@@ -880,6 +880,12 @@ This layer is a public-safety and institutional response-pressure proxy. It is n
 
 ## Data Quality Layer
 
+Source availability is captured before missing-value defaults are applied. Coverage
+counts 14 input layers, excluding derived composites. Legacy all-zero local rows
+require source review and an explicit availability marker; they are not assumed
+to be observed zeros. See [the correction and offline regression tests](docs/source_availability_fix.md).
+Existing sample outputs have not been regenerated with this correction.
+
 The data-quality module creates source availability flags for all active model layers.
 
 The `data_completeness_score` measures source coverage, not risk. A county with high data completeness is not necessarily high-risk; it simply means the model has stronger input coverage for that county.

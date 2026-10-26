@@ -1166,13 +1166,14 @@ Active Phase 6 source flags include:
 - TBI gang + explosive-use activity
 - TBI hate-crime offense activity
 - TBI law-enforcement ambush activity
-- Targeted harm / public-safety
-- Institutional / enforcement pressure
+
+Targeted harm / public-safety and institutional / enforcement pressure retain
+dependency-based diagnostic flags but are excluded from the source count.
 
 The data completeness score is calculated as:
 
 ```text
-data_completeness_score = (active_source_count / total_active_sources) * 100
+data_completeness_score = (available_input_layer_count / 14) * 100
 ```
 
 Model confidence is assigned as:
@@ -1184,7 +1185,9 @@ Model confidence is assigned as:
 | 60–80 | Good |
 | 80–100 | High |
 
-Data completeness measures source coverage, not risk.
+Data completeness measures source coverage, not risk or predictive confidence.
+Availability requires complete finite nonnegative fields before imputation and
+respects source-level availability markers. Column presence alone is insufficient.
 
 Reference/context appendices have separate validation outputs and are not included in the county-level data-completeness score.
 
@@ -1199,7 +1202,15 @@ Examples:
 - A county may have true zero values for selected ACLED event categories.
 - A county may have true zero values for selected gang-related activity categories.
 - A county may have true zero values for selected hate-crime or law-enforcement ambush categories.
-- A missing input file creates a zero-filled template, which may require later source review.
+- A missing input file creates a zero-filled template with an explicit false
+  availability marker. Re-reading it does not make it observed data.
+- Legacy all-zero local rows are unverified unless source review confirms them
+  and sets their layer-specific availability marker to true.
+- Missing counties, incomplete schemas, and invalid values do not count as
+  complete layer coverage, even though numeric scoring fallbacks remain unchanged.
+
+See [source availability correction](source_availability_fix.md) for migration
+notes and offline verification. Existing published artifacts are preserved.
 
 Data-quality notes identify possible gaps, zero-filled inputs, and true-zero conditions.
 

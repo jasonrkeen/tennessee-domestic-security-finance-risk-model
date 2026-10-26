@@ -1098,7 +1098,7 @@ def build_scores(master_df: pd.DataFrame) -> pd.DataFrame:
     # ------------------------------------------------------------------
     # Data quality / model confidence
     # ------------------------------------------------------------------
-    df = add_data_quality_flags(df)
+    df = add_data_quality_flags(df, source_df=master_df)
     save_data_quality_outputs(df)
 
     df = df.sort_values(
