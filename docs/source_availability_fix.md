@@ -76,5 +76,69 @@ All eight saved dashboard images and `docs/sample_report.pdf` retain their base
 Git blob hashes. The Windows PDF checkout has Git's pre-existing CRLF conversion;
 its bytes match `git cat-file --filters` for the base revision. The stored PDF
 SHA-256 remains `b060d313b51244eca5ecf064315186fa7f8345ef0878dd60831a1e52234f9ab3`.
-No existing data/output artifacts were regenerated. This verifies saved-artifact
-preservation and synthetic numerical parity, not a rerun of unavailable live data.
+No existing data/output artifacts were overwritten. The synthetic checks above
+were followed by the frozen real-data validation below.
+
+## Frozen real-data validation (2026-10-26)
+
+The original local project supplied 170 data/output files (50,801,037 bytes).
+They were copied into a separate validation workspace with per-file SHA-256,
+size, and file-modification metadata. All original file hashes were checked again
+after replay and remained unchanged. File modification dates are not observation
+dates. Raw data and county-level validation artifacts remain local, outside this PR.
+
+Base `bb6f0b5f7955c09b36db66202e77d29ed3c7d9ad` and candidate
+`b26350111fe0cd0f76a9e6a76410c2058733eb96` were run in separate directories.
+Each scored both the saved master and a master rebuilt through the local loaders.
+ACS, CBP, and FEMA collectors were replaced with frozen saved-cache reads;
+HTTP requests were blocked. This checks local assembly and scoring, not fresh API
+collection or an end-to-end refresh of every upstream preparation script.
+
+All 42 comparison checks passed at relative/absolute tolerance 1e-12:
+
+- 95 county rows and 377 non-quality fields agree between base and candidate.
+- All ten scenarios (950 county-scenario rows), 100 scenario-leader rows, and
+  95 rank-stability rows agree.
+- Non-quality projections of all nine emitted county score tables agree.
+- Rebuilt and saved-master scores agree in each version. The base replay also
+  agrees with the saved historical score, scenario, and rank tables.
+- County/population identity in the quality table agrees after county alignment;
+  its row order intentionally changes because it is sorted by completeness.
+
+Coverage/confidence metadata intentionally differs. The original 95 High labels
+become 7 High, 48 Good, and 40 Moderate. These remain coverage bands, not validated
+probabilities or predictive confidence. No numeric scoring changes were made.
+Historical charts/PDFs were preserved rather than regenerated; their old coverage
+labels are not corrected by this replay.
+
+### Source review and unresolved coverage
+
+The review recorded 462 unresolved county/input-layer pairs across seven layers:
+
+| Layer | Unverified counties | Evidence |
+| --- | ---: | --- |
+| CBP | 2 | Moore and Van Buren FIPS absent from the 93-row saved cache |
+| Disaster/disruption | 95 | All 15 input fields zero; no observed-zero provenance |
+| Political violence | 68 | Counties absent from the 27-county event aggregation |
+| Explosives | 71 | Selected raw TBI cells blank |
+| Gang/explosives | 71 | Selected raw TBI cells blank |
+| Hate-crime offenses | 64 | Selected raw TBI cells blank |
+| Law-enforcement ambush | 91 | Selected raw TBI cells blank |
+
+For every flagged county in the four TBI layers, all selected raw count cells
+were blank, rather than explicit numeric zeros. The saved exports identify
+Incident Date 2024 and export date 2026-05-28. Existing processors convert these
+blanks to zero; the exports alone do not establish the meaning of blanks or
+county reporting completeness. No county was promoted to confirmed observed zero.
+The ACS cache records 2024; the CBP cache does not record its retrieval year.
+
+Before promoting coverage, establish TBI blank-cell semantics and county/year
+reporting coverage, recover the two missing CBP counties with year/category
+provenance, supply measured disruption inputs, and document ACLED query coverage
+and pagination. Positive legacy rows still use inferred availability and are not
+independently certified by this audit. Derived availability flags were excluded
+from the 462 input-layer count.
+
+Disposition: numerical parity is supported within the reviewed frozen-input
+scope; source coverage remains qualified. Keep PR #2 in draft for review of these
+limitations. Other scoring changes remain separate.
