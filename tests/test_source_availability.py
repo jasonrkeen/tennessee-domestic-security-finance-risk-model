@@ -155,6 +155,40 @@ def test_cbp_partial_retrieval_and_valid_zero(monkeypatch):
     assert not data_collection.collect_cbp_business_exposure()["cbp_data_available"].any()
 
 
+def test_cbp_successful_queries_with_unpublished_county_cells(
+    monkeypatch, tmp_path, socioeconomic,
+):
+    """Successful industry queries do not establish every county's coverage."""
+    industries = list(data_collection.CBP_INDUSTRIES)
+    monkeypatch.setattr(data_collection, "CBP_YEARS_TO_TRY", [2023])
+
+    def fetch(year, industry):
+        # A has every published category, B lacks one, C has no published rows.
+        counties = ["001"] if industry == industries[0] else ["001", "003"]
+        return pd.DataFrame({
+            "state": ["47"] * len(counties), "county": counties,
+            "ESTAB": [3] * len(counties), "cbp_year": year,
+            "naics_code": industry, "naics_param_used": "NAICS2017",
+        })
+
+    monkeypatch.setattr(data_collection, "_try_cbp_year_industry", fetch)
+    data_collection.collect_cbp_business_exposure()
+    cached = pd.read_csv(
+        tmp_path / "tn_cbp_business_exposure.csv", dtype={"fips": str},
+    )
+    master = socioeconomic.merge(cached, on="fips", how="left")
+    scores = risk_scoring.build_scores(master).set_index("county")
+    assert scores["cbp_data_available"].to_dict() == {
+        "Synthetic A": True, "Synthetic B": False, "Synthetic C": False,
+    }
+    # Preserve existing numeric fallback behavior while keeping it unverified.
+    missing_column = data_collection.CBP_INDUSTRIES[industries[0]]
+    assert scores.loc["Synthetic B", missing_column] == 0
+    assert scores.loc["Synthetic C", missing_column] == 0
+    assert scores.loc["Synthetic A", missing_column] == 3
+    assert not scores.loc["Synthetic C", "cbp_true_zero_selected_categories"]
+
+
 def test_fema_failure_is_not_zero_observation(monkeypatch, tmp_path, socioeconomic):
     socioeconomic.to_csv(tmp_path / "tn_acs_county_data.csv", index=False)
     def failed(*args, **kwargs):

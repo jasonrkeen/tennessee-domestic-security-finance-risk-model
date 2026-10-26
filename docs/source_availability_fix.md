@@ -81,6 +81,11 @@ were followed by the frozen real-data validation below.
 
 ## Frozen real-data validation (2026-10-26)
 
+Subsequent source review found additional legacy CBP category gaps. See
+[source_coverage_followup.md](source_coverage_followup.md) for the staged,
+source-reviewed coverage correction and its separate parity checks. The results
+below describe the first frozen replay and are retained as audit history.
+
 The original local project supplied 170 data/output files (50,801,037 bytes).
 They were copied into a separate validation workspace with per-file SHA-256,
 size, and file-modification metadata. All original file hashes were checked again
