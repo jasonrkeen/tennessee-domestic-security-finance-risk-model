@@ -1,5 +1,19 @@
 # Tennessee Domestic Security & Illicit Finance Risk Intelligence Model
 
+## Download the v1.0.0 research release
+
+- **[Release overview](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/releases/tag/v1.0.0)** — scope, validation, and all downloads.
+- **[Final report (PDF)](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/releases/download/v1.0.0/final_report.pdf)** — five-page research and source-review report; no installation needed.
+- **[Dashboard package (ZIP)](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/releases/download/v1.0.0/tennessee-financial-security-risk-model-v1.0.0.zip)** — preserved outputs, the 95-county summary, screenshots, source code, and locked dependencies.
+- **[Start Here guide](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/releases/download/v1.0.0/START_HERE.md)** — setup, interpretation, and verification instructions.
+- **[Download checksums](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/releases/download/v1.0.0/SHA256SUMS.txt)** — SHA-256 hashes for the release assets.
+
+For the dashboard, extract the ZIP into a new folder and open `START_HERE.html`.
+The tested setup is Windows x64 with Python 3.14.4. It reads bundled saved outputs
+without source API keys; do not run the collection pipeline to view this release.
+This is a downloadable local dashboard, not a hosted service. Scores and original
+data remain unchanged, and saved coverage labels are not predictive confidence.
+
 ## Final research report
 
 The [November 10, 2026 final research report](docs/final-report-2026-11-10/final_report.pdf)
