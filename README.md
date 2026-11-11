@@ -1,5 +1,16 @@
 # Tennessee Domestic Security & Illicit Finance Risk Intelligence Model
 
+## Final research report
+
+The [November 10, 2026 final research report](docs/final-report-2026-11-10/final_report.pdf)
+consolidates preserved county results, reviewed source coverage, and remaining
+limitations. See the [report guide and verification record](docs/final-report-2026-11-10/README.md)
+for scope and evidence. Scores and original data are unchanged. Source-completeness
+labels are not predictive confidence, and this report does not establish predictive
+validation. [PR #2](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/pull/2)
+remains draft for review.
+
+
 **County-level OSINT model for illicit-finance vulnerability, cash-economy exposure, tactical-access indicators, organized/group criminal activity indicators, explosive-use indicators, targeted-harm indicators, public-safety personnel pressure, disaster/disruption vulnerability, institutional/enforcement pressure, operational-risk / protective-planning context, public group / network reference context, TDOC correctional-system STG context, statewide hate-crime context, political violence / civil unrest exposure, and domestic security risk in Tennessee.**
 
 Prepared by **Jason Keen**  
@@ -879,6 +890,12 @@ This layer is a public-safety and institutional response-pressure proxy. It is n
 ---
 
 ## Data Quality Layer
+
+Source availability is captured before missing-value defaults are applied. Coverage
+counts 14 input layers, excluding derived composites. Legacy all-zero local rows
+require source review and an explicit availability marker; they are not assumed
+to be observed zeros. See [the correction and offline regression tests](docs/source_availability_fix.md).
+Existing sample outputs have not been regenerated with this correction.
 
 The data-quality module creates source availability flags for all active model layers.
 
