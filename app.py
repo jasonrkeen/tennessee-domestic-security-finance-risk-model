@@ -14,6 +14,12 @@ TABLES_DIR = OUTPUTS_DIR / "tables"
 CHARTS_DIR = OUTPUTS_DIR / "charts"
 REPORTS_DIR = OUTPUTS_DIR / "reports"
 REPORT_PATH = REPORTS_DIR / "tennessee_domestic_security_finance_risk_report.pdf"
+FINAL_REPORT_PATH = BASE_DIR / "docs/final-report-2026-11-10/final_report.pdf"
+COVERAGE_NOTICE = (
+    "Scores are saved relative research indices, not predictions. Coverage bands describe "
+    "the loaded files, not predictive confidence. Historical files may retain older, "
+    "inflated coverage labels; opening this dashboard does not apply the separate source review."
+)
 
 
 TABLES = {
@@ -201,7 +207,13 @@ def show_df(df: pd.DataFrame, desired: list[str] | None = None, height: int = 42
             out = out[present]
 
     out = make_arrow_safe(out)
-    st.dataframe(out, width="stretch", hide_index=True, height=height)
+    st.dataframe(
+        out, width="stretch", hide_index=True, height=height,
+        column_config={
+            "model_confidence": "Saved coverage band",
+            "data_completeness_score": "Saved source completeness (%)",
+        },
+    )
 
 
 def score(value) -> str:
@@ -289,7 +301,7 @@ def sidebar(scores_df: pd.DataFrame) -> tuple[pd.DataFrame, list[str], list[str]
 
     st.sidebar.divider()
     st.sidebar.caption("Empty selections mean all counties / all signals.")
-    st.sidebar.caption("Run `python main.py` before opening the dashboard.")
+    st.sidebar.caption("This view reads saved outputs; it does not refresh source data.")
     return filtered, selected_counties, selected_signals
 
 
@@ -348,7 +360,7 @@ def metrics(scores_df: pd.DataFrame) -> None:
         f"Score {score(top.get('final_domestic_security_risk_score'))}",
     )
     c2.metric("Top Signal", str(top.get("risk_signal", "N/A")))
-    c3.metric("Avg. Source Completeness", f"{avg_comp:.1f}%" if not pd.isna(avg_comp) else "N/A")
+    c3.metric("Avg. Saved Completeness", f"{avg_comp:.1f}%" if not pd.isna(avg_comp) else "N/A")
     c4.metric("Elevated / High Counties", f"{int(elevated):,}")
 
 
@@ -463,8 +475,8 @@ def county_deep_dive(scores_df: pd.DataFrame) -> None:
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Final Score", score(row.get("final_domestic_security_risk_score")))
     c2.metric("Signal", str(row.get("risk_signal", "N/A")))
-    c3.metric("Confidence", str(row.get("model_confidence", "N/A")))
-    c4.metric("Completeness", f"{score(row.get('data_completeness_score'))}%")
+    c3.metric("Saved coverage band", str(row.get("model_confidence", "N/A")))
+    c4.metric("Saved completeness", f"{score(row.get('data_completeness_score'))}%")
 
     detail = row_df.T.reset_index()
     detail.columns = ["metric", "value"]
@@ -1139,8 +1151,8 @@ def county_brief(scores_df: pd.DataFrame) -> None:
 
 - **Final Model Score:** {final_score}
 - **Risk Signal:** {signal}
-- **Model Confidence:** {confidence}
-- **Data Completeness:** {completeness}%
+- **Saved source-coverage band:** {confidence}
+- **Saved source completeness:** {completeness}%
 - **Population:** {population_display}
 
 ## Top Contributing Model Layers
@@ -1159,6 +1171,9 @@ This brief is generated from county-level aggregate public-source indicators onl
 
 ## Recommended Analyst Next Steps
 
+Coverage describes the loaded file, not predictive confidence. Historical labels may
+pre-date the separate source review. Unknown or unpublished inputs are not observed zeros.
+
 1. Review the county's top component scores against the data-quality flags.
 2. Check whether high scores are driven by broad source coverage, true-zero conditions, or a small number of high per-capita indicators.
 3. Compare the county's baseline rank with sensitivity-analysis rankings.
@@ -1168,8 +1183,8 @@ This brief is generated from county-level aggregate public-source indicators onl
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Final Score", final_score)
     c2.metric("Signal", signal)
-    c3.metric("Confidence", confidence)
-    c4.metric("Completeness", f"{completeness}%")
+    c3.metric("Saved coverage band", confidence)
+    c4.metric("Saved completeness", f"{completeness}%")
 
     st.markdown(brief_text)
 
@@ -1219,20 +1234,37 @@ case narratives, incident IDs, individual names, or operational notes to this pr
 
 
 def pdf_tab() -> None:
-    st.header("PDF Report")
+    st.header("Research reports")
+    if FINAL_REPORT_PATH.exists():
+        st.download_button(
+            "Download final research report (November 10, 2026)",
+            FINAL_REPORT_PATH.read_bytes(), file_name=FINAL_REPORT_PATH.name,
+            mime="application/pdf", key="download_final_research_report",
+        )
+        st.caption("Dated source review with unchanged scores and explicit limitations.")
+    else:
+        st.info("The final research report is not available in this checkout.")
 
     if REPORT_PATH.exists():
-        st.success("PDF report found.")
         st.download_button(
-            "Download PDF Report",
-            REPORT_PATH.read_bytes(),
-            file_name=REPORT_PATH.name,
-            mime="application/pdf",
-            key="download_pdf_report",
+            "Download historical model report",
+            REPORT_PATH.read_bytes(), file_name=REPORT_PATH.name,
+            mime="application/pdf", key="download_pdf_report",
         )
-    else:
-        st.info("PDF report not found. Run `python main.py` first.")
-        st.code("python main.py", language="powershell")
+        st.caption("Historical model output may retain coverage labels from before source review.")
+
+
+def coverage_context() -> None:
+    st.info(COVERAGE_NOTICE)
+    with st.expander("How to interpret source coverage"):
+        st.markdown(
+            "The November 10 source review reported **4 High, 29 Good and 62 Moderate** "
+            "coverage bands in a separate reviewed copy. These are dated review findings, "
+            "not a recalculation of the files loaded here. Even High coverage does not "
+            "certify complete reporting. Unverified TBI blanks, unpublished Census values, "
+            "and absent ACLED rows must not be interpreted as confirmed zeros. "
+            "NOAA and CDC SVI analyses remain candidate/context work, outside the saved scores."
+        )
 
 
 def main() -> None:
@@ -1240,17 +1272,20 @@ def main() -> None:
     tables = load_tables()
     scores_df = tables["scores"]
 
-    if scores_df.empty:
-        st.error("Main score output not found. Run `python main.py` first.")
-        st.code("python main.py", language="powershell")
-
-    filtered_scores, selected_counties, selected_signals = sidebar(scores_df)
-
     st.title("Tennessee Domestic Security & Illicit Finance Risk Intelligence Dashboard")
     st.caption(
         "County-level OSINT indicators only | Reference/context layers, including TDOC STG context, are non-scoring | "
         "Operational-risk layer is defensive protective-planning context | Portfolio decision-support product"
     )
+
+    coverage_context()
+    if scores_df.empty:
+        st.info("No saved county scores are loaded. The final research report is available below. "
+                "Use a preserved output copy to explore the dashboard without refreshing source data.")
+        pdf_tab()
+        return
+
+    filtered_scores, selected_counties, selected_signals = sidebar(scores_df)
 
     if selected_counties or selected_signals:
         county_label = ", ".join(selected_counties) if selected_counties else "All counties"
@@ -1416,8 +1451,9 @@ def main() -> None:
         scenarios(filtered_scores, tables["sensitivity"], tables["rank_stability"])
 
     with tabs[12]:
-        st.header("Data Quality & Model Confidence")
-        st.info("Data completeness measures source coverage, not risk.")
+        st.header("Source coverage in loaded files")
+        st.info("These are saved coverage diagnostics, not predictive confidence or certified reporting completeness. "
+                "The separate reviewed assessment is described above and in the final report.")
         show_df(apply_county_filter(tables["data_quality"], selected_counties), height=650)
 
     with tabs[13]:

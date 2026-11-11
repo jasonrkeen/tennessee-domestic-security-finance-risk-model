@@ -4,6 +4,7 @@
 # Virtual environments
 .venv/
 .venv-1/
+.venv-lock/
 venv/
 env/
 
