@@ -1080,6 +1080,12 @@ presence. All-zero legacy local rows require review and an affirmative marker.
 diagnostics only. `model_confidence` remains a coverage band, not predictive
 confidence. See [correction details](source_availability_fix.md).
 
+The `*_true_zero_selected_categories` diagnostics require both the applicable
+availability flag and a zero selected total; column presence alone is insufficient.
+Unverified or unpublished inputs do not become observed zeros because numeric
+fallbacks are zero. For the two derived composites, availability requires their
+documented input dependencies; these flags are not independent source evidence.
+
 | Column | Type | Description |
 |---|---:|---|
 | `acs_data_available` | Boolean | Whether ACS socioeconomic data is available. |
@@ -1117,33 +1123,33 @@ confidence. See [correction details](source_availability_fix.md).
 | `possible_targeted_harm_public_safety_gap_flag` | Boolean | Indicates possible missing targeted harm / public-safety fields. |
 | `possible_institutional_gap_flag` | Boolean | Indicates possible missing institutional / enforcement pressure fields. |
 | `cbp_selected_establishment_total` | Numeric | Sum of selected CBP establishment counts. |
-| `cbp_true_zero_selected_categories` | Boolean | Indicates CBP columns exist but selected category totals are zero. |
+| `cbp_true_zero_selected_categories` | Boolean | True only when `cbp_data_available` is true and `cbp_selected_establishment_total` equals zero. |
 | `ffl_selected_total` | Numeric | Sum of selected FFL aggregate values. |
-| `ffl_true_zero_selected_categories` | Boolean | Indicates FFL columns exist but selected totals are zero. |
+| `ffl_true_zero_selected_categories` | Boolean | True only when `ffl_data_available` is true and `ffl_selected_total` equals zero. |
 | `fema_selected_total` | Numeric | Sum of selected FEMA disaster values. |
-| `fema_true_zero_selected_categories` | Boolean | Indicates FEMA columns exist but selected values are zero. |
+| `fema_true_zero_selected_categories` | Boolean | True only when `fema_data_available` is true and `fema_selected_total` equals zero. |
 | `disaster_disruption_selected_total` | Numeric | Sum of selected Phase 6 disaster/disruption values. |
-| `disaster_disruption_true_zero_selected_categories` | Boolean | Indicates disaster/disruption columns exist but selected values are zero. |
+| `disaster_disruption_true_zero_selected_categories` | Boolean | True only when `disaster_disruption_data_available` is true and `disaster_disruption_selected_total` equals zero. |
 | `crime_weapons_selected_total` | Numeric | Sum of selected crime/weapons counts. |
-| `crime_true_zero_selected_categories` | Boolean | Indicates CrimeInsight columns exist but selected totals are zero. |
+| `crime_true_zero_selected_categories` | Boolean | True only when `crime_data_available` is true and `crime_weapons_selected_total` equals zero. |
 | `crime_rate_selected_total` | Numeric | Sum of selected crime-rate input values. |
-| `crime_rate_true_zero_selected_categories` | Boolean | Indicates crime-rate columns exist but selected values are zero. |
+| `crime_rate_true_zero_selected_categories` | Boolean | True only when `crime_rate_data_available` is true and `crime_rate_selected_total` equals zero. |
 | `political_violence_selected_total` | Numeric | Sum of selected ACLED political violence / civil unrest values. |
-| `political_violence_true_zero_selected_categories` | Boolean | Indicates ACLED columns exist but selected values are zero. |
+| `political_violence_true_zero_selected_categories` | Boolean | True only when `political_violence_data_available` is true and `political_violence_selected_total` equals zero. |
 | `gang_activity_selected_total` | Numeric | Sum of selected TBI gang-related activity values. |
-| `gang_activity_true_zero_selected_categories` | Boolean | Indicates gang-related activity columns exist but selected values are zero. |
+| `gang_activity_true_zero_selected_categories` | Boolean | True only when `gang_activity_data_available` is true and `gang_activity_selected_total` equals zero. |
 | `explosives_activity_selected_total` | Numeric | Sum of selected explosive-use activity values. |
-| `explosives_activity_true_zero_selected_categories` | Boolean | Indicates explosive-use columns exist but selected values are zero. |
+| `explosives_activity_true_zero_selected_categories` | Boolean | True only when `explosives_activity_data_available` is true and `explosives_activity_selected_total` equals zero. |
 | `gang_explosives_activity_selected_total` | Numeric | Sum of selected gang + explosives values. |
-| `gang_explosives_activity_true_zero_selected_categories` | Boolean | Indicates gang + explosives columns exist but selected values are zero. |
+| `gang_explosives_activity_true_zero_selected_categories` | Boolean | True only when `gang_explosives_activity_data_available` is true and `gang_explosives_activity_selected_total` equals zero. |
 | `hate_crime_offense_selected_total` | Numeric | Sum of selected hate-crime offense values. |
-| `hate_crime_offense_true_zero_selected_categories` | Boolean | Indicates hate-crime offense columns exist but selected values are zero. |
+| `hate_crime_offense_true_zero_selected_categories` | Boolean | True only when `hate_crime_offense_data_available` is true and `hate_crime_offense_selected_total` equals zero. |
 | `law_enforcement_ambush_selected_total` | Numeric | Sum of selected law-enforcement ambush values. |
-| `law_enforcement_ambush_true_zero_selected_categories` | Boolean | Indicates law-enforcement ambush columns exist but selected values are zero. |
+| `law_enforcement_ambush_true_zero_selected_categories` | Boolean | True only when `law_enforcement_ambush_data_available` is true and `law_enforcement_ambush_selected_total` equals zero. |
 | `targeted_harm_public_safety_selected_total` | Numeric | Sum of selected targeted harm / public-safety values. |
-| `targeted_harm_public_safety_true_zero_selected_categories` | Boolean | Indicates targeted harm / public-safety columns exist but selected values are zero. |
+| `targeted_harm_public_safety_true_zero_selected_categories` | Boolean | True only when `targeted_harm_public_safety_data_available` is true and `targeted_harm_public_safety_selected_total` equals zero. |
 | `institutional_selected_total` | Numeric | Sum of selected institutional / enforcement pressure fields. |
-| `institutional_true_zero_selected_categories` | Boolean | Indicates institutional / enforcement fields exist but selected values are zero. |
+| `institutional_true_zero_selected_categories` | Boolean | True only when `institutional_data_available` is true and `institutional_selected_total` equals zero. |
 | `data_quality_note` | Text | Notes explaining missing, zero-filled, or true-zero source conditions. |
 
 Reference/context validation fields are tracked separately and are not included in `data_completeness_score`.
