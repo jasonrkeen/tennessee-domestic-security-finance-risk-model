@@ -1,5 +1,19 @@
 # Source coverage follow-up — 2026-10-26
 
+**November 10 final report:** See the [consolidated source decisions and report](final-report-2026-11-10/README.md).
+The October 26 findings below are retained as a dated audit. Later Census, NOAA,
+SVI, ACLED and TBI findings narrow their interpretation without changing scores
+or source files. Further email outreach has ended; unresolved questions remain
+explicit limitations of the final research output.
+
+
+**October 28 addendum:** Census has clarified the omitted 2023 CBP cells as
+0–2 establishments with no exact-count distinction. See the
+[dated clarification](census_cbp_clarification_2026-10-28.md), including the
+exactly-three threshold question, closed by Census on October 29: three or more
+establishments are published in 2023. This addendum changes documentation
+only; the findings below retain their original audit date.
+
 The frozen-data parity result remains valid. Further source review found that
 legacy CBP coverage was still overstated because the saved cache had already
 filled unpublished county/category cells with zero. No scoring formulas or

@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-10",
+  "original_files_checked": 170,
+  "frozen_files_checked": 170,
+  "all_integrity_checks_passed": true,
+  "preserved_score_tables": [
+    {
+      "file": "preserved_score_tables\\model_weight_sensitivity_results.csv",
+      "sha256": "eb2b7f90b251c8475b4617df43324d3b54be13814dd091e412d7e82ad984259a",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\scenario_top_county_leaders.csv",
+      "sha256": "b1eced5a006ca6c020ab12f8f075a6f799c56b7187363bcef081dc033fe43d2f",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_component_scores.csv",
+      "sha256": "40ad0e121507d9b382945880cb9f901037e4501c8d1c6495827dd8fb4a623d07",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_crime_weapons_scores.csv",
+      "sha256": "3d0fe23c37dba76ed99e483e3f32d0e5f0ec76502eb7bae2c44a93eaf73ad050",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_disaster_disruption_scores.csv",
+      "sha256": "74cfbaef699a24fe58386599bf7e27837466d656323e69431040e2c458a3621a",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_domestic_security_scores.csv",
+      "sha256": "70821e90e66ff116f13d520317d0c390dce7843b2d5d9533ffbbb73bd67f1216",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_finance_tactical_scores.csv",
+      "sha256": "aea31a0a6f7b1eac71cb31dff00d7713fe951cf4356035e51f2e0c19f19448f3",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_institutional_enforcement_scores.csv",
+      "sha256": "e48327ae0098f28e7111fa8e6c70438e67ecc3c1fa8315b07fadac442b9eab4b",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_organized_violence_scores.csv",
+      "sha256": "f120accaa976fac94e7c444de78826c9f1d0256d6831b847e27fe5369d5f31f4",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_political_violence_scores.csv",
+      "sha256": "1671edda0e3b185b286e66b284623b1b20f1e96d46f2be4c4566d9d46e46462d",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\tn_county_targeted_harm_public_safety_scores.csv",
+      "sha256": "91b451b5dce89f3e252b8f40bb2768ac8d1f25fd8b098e60f45f3663a426f44d",
+      "byte_identical_to_frozen": true
+    },
+    {
+      "file": "preserved_score_tables\\top_county_rank_stability.csv",
+      "sha256": "e9cd911464dd1e97f4531315c5a1547560bfd0f462a4dcf54b0a6eeeb92606d0",
+      "byte_identical_to_frozen": true
+    }
+  ],
+  "county_summary_rows": 95,
+  "county_score_strings_identical": true,
+  "fresh_local_pytest": {
+    "passed": 39,
+    "warnings": 188,
+    "warning_type": "pandas fragmentation PerformanceWarning"
+  },
+  "prior_full_numeric_parity_checks": 42,
+  "prior_reviewed_coverage_parity_checks": 12,
+  "prior_numeric_tolerance": {
+    "rtol": 1e-12,
+    "atol": 1e-12
+  },
+  "pipeline_rerun_this_release": false,
+  "live_data_refresh": false,
+  "outreach": "Closed by user; no further emails",
+  "pr_2": {
+    "state": "open",
+    "draft": true,
+    "head": "ed7a63a6e152eab2034be5605ab4e111b14e0ae8",
+    "verified_date": "2026-11-10"
+  }
+}

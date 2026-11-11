@@ -1,5 +1,16 @@
 # Tennessee Domestic Security & Illicit Finance Risk Intelligence Model
 
+## Final research report
+
+The [November 10, 2026 final research report](docs/final-report-2026-11-10/final_report.pdf)
+consolidates preserved county results, reviewed source coverage, and remaining
+limitations. See the [report guide and verification record](docs/final-report-2026-11-10/README.md)
+for scope and evidence. Scores and original data are unchanged. Source-completeness
+labels are not predictive confidence, and this report does not establish predictive
+validation. [PR #2](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/pull/2)
+remains draft for review.
+
+
 **County-level OSINT model for illicit-finance vulnerability, cash-economy exposure, tactical-access indicators, organized/group criminal activity indicators, explosive-use indicators, targeted-harm indicators, public-safety personnel pressure, disaster/disruption vulnerability, institutional/enforcement pressure, operational-risk / protective-planning context, public group / network reference context, TDOC correctional-system STG context, statewide hate-crime context, political violence / civil unrest exposure, and domestic security risk in Tennessee.**
 
 Prepared by **Jason Keen**  
