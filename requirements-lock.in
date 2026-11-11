@@ -1,0 +1,6 @@
+# Reproducible Python 3.14 test/dashboard environment, including dev tools.
+-r requirements-dev.txt
+# Preserve the numerical and dashboard versions used for the reviewed baseline.
+pandas==3.0.2
+numpy==2.4.4
+streamlit==1.56.0

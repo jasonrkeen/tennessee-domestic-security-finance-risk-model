@@ -8,7 +8,11 @@ limitations. See the [report guide and verification record](docs/final-report-20
 for scope and evidence. Scores and original data are unchanged. Source-completeness
 labels are not predictive confidence, and this report does not establish predictive
 validation. [PR #2](https://github.com/jasonrkeen/tennessee-domestic-security-finance-risk-model/pull/2)
-remains draft for review.
+was merged on November 11. The report retains its dated November 10 status.
+
+See the [release note](docs/releases/2026-11-11.md) and
+[locked installation and test instructions](docs/reproducibility.md) for the
+separate reproducibility and dashboard-presentation update.
 
 
 **County-level OSINT model for illicit-finance vulnerability, cash-economy exposure, tactical-access indicators, organized/group criminal activity indicators, explosive-use indicators, targeted-harm indicators, public-safety personnel pressure, disaster/disruption vulnerability, institutional/enforcement pressure, operational-risk / protective-planning context, public group / network reference context, TDOC correctional-system STG context, statewide hate-crime context, political violence / civil unrest exposure, and domestic security risk in Tennessee.**
