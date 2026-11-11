@@ -292,6 +292,8 @@ def test_fema_page_limit_is_not_complete_coverage(monkeypatch):
 
 
 def test_acs_missing_component_not_hidden_by_sum(monkeypatch):
+    # The response is mocked; never depend on a developer's real credential.
+    monkeypatch.setattr(data_collection, "CENSUS_API_KEY", "synthetic-test-key")
     fields = list(data_collection.ACS_VARIABLES)
     header = ["NAME"] + fields + ["state", "county"]
     values = [10000, 60000, 10000, 1000, 5000, 200, 1000, None, 100, 100, 100]
