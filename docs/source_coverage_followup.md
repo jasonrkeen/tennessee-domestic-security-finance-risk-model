@@ -1,5 +1,7 @@
 # Source coverage follow-up — 2026-10-26
 
+> **Current status — November 11, 2026:** PRs #2 and #3 are merged and v1.0.0 is released. Draft-PR statements below describe the historical review, not current status. See the [release note](releases/2026-11-11.md). The dated final report and preserved scores remain unchanged.
+
 **November 10 final report:** See the [consolidated source decisions and report](final-report-2026-11-10/README.md).
 The October 26 findings below are retained as a dated audit. Later Census, NOAA,
 SVI, ACLED and TBI findings narrow their interpretation without changing scores
