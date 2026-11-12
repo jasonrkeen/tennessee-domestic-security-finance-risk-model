@@ -49,6 +49,10 @@ def test_saved_coverage_is_labeled_and_filters_do_not_write(dashboard_files):
     assert any(item.label == "Saved coverage band" for item in at.metric)
     brief = next(item.value for item in at.markdown if "Saved source-coverage band:" in item.value)
     assert "not predictive confidence" in brief
+    assert "Explosives filter" in brief
+    assert "All Clearances block" in brief
+    assert "does not authenticate other files" in brief
+    assert sum("Explosives filter" in item.value for item in at.info) == 2
     selected = scores.iloc[0]["county"]
     at.sidebar.multiselect(key="sidebar_filter_counties_unique").set_value([selected]).run()
     assert not at.exception
