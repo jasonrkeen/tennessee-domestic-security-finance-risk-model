@@ -71,7 +71,7 @@ The model is designed to support analytical thinking around:
 - TBI 2024 statewide hate-crime context
 - CrimeInsight trend analysis
 - Model-weight sensitivity and rank stability
-- County-level data quality and model confidence
+- County-level data quality and source coverage
 
 The model **does not predict attacks**, identify suspects, assess individual businesses, assess individual licensees, identify threat actors, infer motive or ideology, or label lawful activity as suspicious. It uses aggregate county-level indicators only.
 
@@ -571,7 +571,7 @@ streamlit run app.py
 | Institutional | Institutional / enforcement pressure indicators |
 | Political Violence | ACLED political violence / civil unrest indicators |
 | Scenarios | Scenario controls and rank-stability outputs |
-| Data Quality | Source availability and model-confidence indicators |
+| Data Quality | Saved source availability and coverage indicators |
 | Public References | Non-scoring public group / network reference layer |
 | TDOC STG Context | Non-scoring correctional-system STG context layer |
 | TBI Hate-Crime Context | Statewide non-scoring hate-crime context tables |
@@ -650,77 +650,26 @@ Do not commit `.env`, raw source files, generated report outputs, or unsanitized
 
 ```text
 tennessee-domestic-security-finance-risk-model/
-│
-├── data/
-│   ├── raw/
-│   │   └── .gitkeep
-│   └── processed/
-│       └── .gitkeep
-│
-├── docs/
-│   ├── images/
-│   │   ├── dashboard_overview.png
-│   │   ├── dashboard_county_brief.png
-│   │   ├── dashboard_operational_risk.png
-│   │   ├── dashboard_operational_charts.png
-│   │   ├── dashboard_finance_tactical.png
-│   │   ├── dashboard_organized_violence.png
-│   │   ├── dashboard_scenarios.png
-│   │   └── dashboard_tdoc_stg_context.png
-│   ├── public_group_reference_sources.md
-│   └── sample_report.pdf
-│
-├── outputs/
-│   ├── charts/
-│   │   └── .gitkeep
-│   ├── reports/
-│   │   └── .gitkeep
-│   └── tables/
-│       └── .gitkeep
-│
-├── src/
-│   ├── acled_processor.py
-│   ├── config.py
-│   ├── crime_inputs.py
-│   ├── crime_offense_processor.py
-│   ├── crime_rate_processor.py
-│   ├── crime_trend_analysis.py
-│   ├── data_collection.py
-│   ├── data_quality.py
-│   ├── disaster_disruption_inputs.py
-│   ├── explosives_processor.py
-│   ├── fdic_processor.py
-│   ├── ffl_processor.py
-│   ├── gang_activity_processor.py
-│   ├── gang_explosives_processor.py
-│   ├── hate_crime_processor.py
-│   ├── law_enforcement_ambush_processor.py
-│   ├── operational_risk_features.py
-│   ├── phase2_inputs.py
-│   ├── political_violence_inputs.py
-│   ├── prepare_county_profile_data.py
-│   ├── prepare_healthcare_capacity.py
-│   ├── prepare_infrastructure_needs.py
-│   ├── prepare_law_enforcement_capacity.py
-│   ├── prepare_tbi_public_safety_context.py
-│   ├── prepare_transport_context.py
-│   ├── public_group_reference.py
-│   ├── report_generator.py
-│   ├── risk_scoring.py
-│   ├── sensitivity_analysis.py
-│   ├── splc_group_reference_processor.py
-│   ├── tbi_hate_crime_report_context.py
-│   ├── tdoc_stg_reference_processor.py
-│   └── visualization.py
-│
-├── app.py
-├── data_dictionary.md
-├── main.py
-├── methodology.md
-├── README.md
-├── requirements.txt
-└── .gitignore
+├── .github/workflows/tests.yml   # Offline regression and dashboard checks
+├── docs/                        # Methodology, data dictionary and source reviews
+│   ├── final-report-2026-11-10/  # Preserved report and verification record
+│   ├── releases/                # Dated release notes
+│   ├── images/                  # Dashboard screenshots
+│   └── reproducibility.md       # Locked setup and verification instructions
+├── src/                         # Collection, preparation, scoring and reporting
+├── tests/                       # Synthetic fixtures and offline tests
+├── app.py                       # Saved-output dashboard
+├── main.py                      # Collection-to-report pipeline
+├── requirements.txt             # Broad application requirements
+├── requirements-dev.txt         # Broad test requirements
+├── requirements-lock.in         # Lock input constraints
+├── requirements-lock.txt        # Hash-locked Windows environment
+└── .python-version
 ```
+
+Local `data/raw/`, `data/processed/` and `outputs/` directories are excluded from
+Git. The release ZIP supplies saved dashboard outputs; a clean source checkout
+does not contain the underlying research datasets.
 
 ---
 
@@ -1025,8 +974,7 @@ Potential future enhancements:
 - Add disaster/disruption automated public-source refreshes.
 - Add county clustering or archetype classification.
 - Add automated validation checks for unexpected source changes.
-- Add model-card documentation.
-- Add GitHub-ready release notes.
+- Expand the existing dashboard model card with an effective-weight audit.
 - Add executive brief outputs for LinkedIn or portfolio use.
 - Add additional source-assisted but human-reviewed public-reference sources such as DOJ case references or ADL state-level public data where appropriate.
 - Add a shorter executive PDF brief for external sharing.
