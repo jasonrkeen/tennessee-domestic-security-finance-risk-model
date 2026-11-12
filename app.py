@@ -15,6 +15,14 @@ CHARTS_DIR = OUTPUTS_DIR / "charts"
 REPORTS_DIR = OUTPUTS_DIR / "reports"
 REPORT_PATH = REPORTS_DIR / "tennessee_domestic_security_finance_risk_report.pdf"
 FINAL_REPORT_PATH = BASE_DIR / "docs/final-report-2026-11-10/final_report.pdf"
+TBI_SELECTION_NOTE = (
+    "Preserved v1.0.0 source review: the gang selection retains an Explosives filter, "
+    "and the hate-crime input uses an All Clearances block. These inputs should not "
+    "be read as unrestricted gang activity or a complete count of hate-crime offenses. "
+    "Blank cells remain unverified, not observed zeros. This note describes the "
+    "reviewed release; it does not authenticate other files loaded here."
+)
+
 COVERAGE_NOTICE = (
     "Scores are saved relative research indices, not predictions. Coverage bands describe "
     "the loaded files, not predictive confidence. Historical files may retain older, "
@@ -1169,6 +1177,10 @@ The most important interpretation is whether multiple independent indicator fami
 
 This brief is generated from county-level aggregate public-source indicators only. It does not identify suspects, groups, businesses, licensees, agencies, addresses, facilities, or event locations. Public group / network references and statewide TBI hate-crime context are non-scoring appendix layers and are not used to calculate this county score.
 
+## Source Selection Limits
+
+{TBI_SELECTION_NOTE}
+
 ## Recommended Analyst Next Steps
 
 Coverage describes the loaded file, not predictive confidence. Historical labels may
@@ -1354,6 +1366,7 @@ def main() -> None:
         )
 
     with tabs[6]:
+        st.info(TBI_SELECTION_NOTE)
         layer(
             "Organized Violence / High-Severity Crime Pressure",
             apply_county_filter(tables["organized"], selected_counties),
@@ -1372,6 +1385,7 @@ def main() -> None:
         )
 
     with tabs[7]:
+        st.info(TBI_SELECTION_NOTE)
         layer(
             "Targeted Harm / Public-Safety Pressure",
             apply_county_filter(tables["targeted"], selected_counties),
