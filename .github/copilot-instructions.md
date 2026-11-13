@@ -8,28 +8,27 @@ County-level OSINT model for Tennessee domestic security, illicit-finance vulner
 - Key libraries: `pandas`, `numpy`, `requests`, `matplotlib`, `reportlab`, `python-dotenv`, `openpyxl`, `streamlit`, `plotly`, `pdfplumber`
 
 ## Folder structure
-- `docs/` (12 files)
-- `src/` (35 files)
+- `docs/` (methodology, source reviews, final report and release notes)
+- `src/` (collection, preparation, scoring and reporting)
+- `tests/` (offline regression fixtures and dashboard checks)
 - `README.md`
 - `app.py`
 - `main.py`
 - `requirements.txt`
 
 ## Setup, run, test
-Commands documented in README.md (referenced files exist):
+Use CPython 3.14.4 on Windows x64 and the hash lock; see `docs/reproducibility.md`.
+In an isolated virtual environment:
 ```bash
-python -m venv .venv
-pip install -r requirements.txt
-python -m src.fdic_processor
-python -m src.ffl_processor
-python -m src.crime_offense_processor
-python -m src.crime_rate_processor
-python -m src.gang_activity_processor
-python -m src.explosives_processor
-python -m src.gang_explosives_processor
-python -m src.hate_crime_processor
+python -m pip install --require-hashes -r requirements-lock.txt
+python -m pip check
+python -m pytest -q
+python -m streamlit run app.py
 ```
-- No automated tests exist yet; if adding them, use pytest under `tests/`.
+The offline suite uses synthetic fixtures and temporary outputs. Do not run
+`main.py` or source processors merely to view or test the saved-output release.
+Preserve the dated final report, original data and frozen expected scores during
+presentation-only changes. Source refreshes and scoring changes need separate review.
 
 ## Conventions observed
 - Functions use type hints; keep annotating new code.

@@ -1,5 +1,7 @@
 # Source availability and confidence correction
 
+> **Current status — November 11, 2026:** PRs #2 and #3 are merged and v1.0.0 is released. Draft-PR statements below describe the historical review, not current status. See the [release note](releases/2026-11-11.md). The dated final report and preserved scores remain unchanged.
+
 This change fixes coverage metadata only. Existing score formulas, numeric
 fallbacks, weights, thresholds, and scenario definitions remain unchanged.
 Previously generated tables, charts, and the sample PDF have not been regenerated.

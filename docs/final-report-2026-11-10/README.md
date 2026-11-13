@@ -1,5 +1,7 @@
 # Final research report and source decisions
 
+> **Current status — November 11, 2026:** PRs #2 and #3 are merged and v1.0.0 is released. Draft-PR statements below describe the historical review, not current status. See the [release note](../releases/2026-11-11.md). The dated final report and preserved scores remain unchanged.
+
 November 10, 2026. This documentation release consolidates the current county-level research model and its source review. It does not refresh data, rerun scoring, modify quality flags, or establish predictive validity.
 
 - [Final report PDF](final_report.pdf): five-page report, including the ten highest preserved numerical results, coverage interpretation, source findings and verification.
