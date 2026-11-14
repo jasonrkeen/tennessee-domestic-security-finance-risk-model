@@ -1,0 +1,41 @@
+{
+  "search_date_local": "2026-11-13",
+  "timezone": "America/Chicago",
+  "roots_by_category": [
+    "Downloads",
+    "Desktop",
+    "OneDrive Documents",
+    "Codex Documents"
+  ],
+  "csv_files_examined": 14512,
+  "csv_prefix_bytes": 65536,
+  "csv_header_terms": [
+    "Crime Rate (per 1,000)",
+    "Crimes Rates by Jurisdiction"
+  ],
+  "zip_directories_examined": 782,
+  "zip_member_screen": [
+    "name contains crime and jurisdiction",
+    "name ends .har",
+    "name contains reportdefinition",
+    "CSV size equals 9798 bytes"
+  ],
+  "csv_or_archive_candidates": 0,
+  "reported_read_errors": 0,
+  "chat_export_shards": 4,
+  "chat_export_conversations": 302,
+  "gmail_pre_june_query_results": 0,
+  "historical_target_files_present": false,
+  "raw_export_recovered": false,
+  "may_selected_member_record_recovered": false,
+  "browser_download_metadata_recovered": true,
+  "definition_visit_is_october_not_may": true,
+  "limitations": [
+    "File instances include copies",
+    "No recursive expansion of nested archives or arbitrary ZIP member-body search",
+    "UTF-8 CSV prefix screen only",
+    "No general image OCR, browser cache or request-body reconstruction",
+    "No offline backup, other drive, cloud version history or deleted-byte recovery",
+    "Chrome immutable base-file view excluded uncheckpointed journal state"
+  ]
+}

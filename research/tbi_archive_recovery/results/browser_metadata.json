@@ -1,0 +1,191 @@
+{
+  "scope": "Allowlisted TBI download metadata and report-definition visits only",
+  "downloads": [
+    {
+      "filename": "Crimes and Clearances by Offense Type (1).csv",
+      "start_utc": "2026-05-28T05:49:31.531421+00:00",
+      "end_utc": "2026-05-28T05:49:31.983208+00:00",
+      "received_bytes": 124075,
+      "total_bytes": 124075,
+      "state_code": 1,
+      "interrupt_reason_code": 0,
+      "stored_hash_bytes": 0,
+      "page": {
+        "host": "crimeinsight.tbi.tn.gov",
+        "path": "/public/View/dispview.aspx",
+        "parameters": {}
+      },
+      "download_chain": [
+        {
+          "host": "crimeinsight.tbi.tn.gov",
+          "path": "/public/View/dispview.aspx",
+          "parameters": {
+            "download": [
+              "yes"
+            ],
+            "DownloadFormat": [
+              "CSV"
+            ],
+            "CsvDataFormat": [
+              "CSV_MD"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "filename": "Crimes and Clearances by Offense Type (2).csv",
+      "start_utc": "2026-05-28T06:22:29.452217+00:00",
+      "end_utc": "2026-05-28T06:22:29.841063+00:00",
+      "received_bytes": 37263,
+      "total_bytes": 37263,
+      "state_code": 1,
+      "interrupt_reason_code": 0,
+      "stored_hash_bytes": 0,
+      "page": {
+        "host": "crimeinsight.tbi.tn.gov",
+        "path": "/public/View/dispview.aspx",
+        "parameters": {}
+      },
+      "download_chain": [
+        {
+          "host": "crimeinsight.tbi.tn.gov",
+          "path": "/public/View/dispview.aspx",
+          "parameters": {
+            "download": [
+              "yes"
+            ],
+            "DownloadFormat": [
+              "CSV"
+            ],
+            "CsvDataFormat": [
+              "CSV_MD"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "filename": "Crimes Rates by Jurisdiction.csv",
+      "start_utc": "2026-05-28T09:23:18.925940+00:00",
+      "end_utc": "2026-05-28T09:23:19.197135+00:00",
+      "received_bytes": 9798,
+      "total_bytes": 9798,
+      "state_code": 1,
+      "interrupt_reason_code": 0,
+      "stored_hash_bytes": 0,
+      "page": {
+        "host": "crimeinsight.tbi.tn.gov",
+        "path": "/public/View/dispview.aspx",
+        "parameters": {}
+      },
+      "download_chain": [
+        {
+          "host": "crimeinsight.tbi.tn.gov",
+          "path": "/public/View/dispview.aspx",
+          "parameters": {
+            "download": [
+              "yes"
+            ],
+            "DownloadFormat": [
+              "CSV"
+            ],
+            "CsvDataFormat": [
+              "CSV_MD"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "filename": "Use of Force Counts and Percent Change.csv",
+      "start_utc": "2026-05-28T22:57:45.143344+00:00",
+      "end_utc": "2026-05-28T22:57:45.471193+00:00",
+      "received_bytes": 21538,
+      "total_bytes": 21538,
+      "state_code": 1,
+      "interrupt_reason_code": 0,
+      "stored_hash_bytes": 0,
+      "page": {
+        "host": "crimeinsight.tbi.tn.gov",
+        "path": "/public/View/dispview.aspx",
+        "parameters": {}
+      },
+      "download_chain": [
+        {
+          "host": "crimeinsight.tbi.tn.gov",
+          "path": "/public/View/dispview.aspx",
+          "parameters": {
+            "download": [
+              "yes"
+            ],
+            "DownloadFormat": [
+              "CSV"
+            ],
+            "CsvDataFormat": [
+              "CSV_MD"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "filename": "Crimes and Clearances by Offense Type.csv",
+      "start_utc": "2026-05-28T22:57:57.128622+00:00",
+      "end_utc": "2026-05-28T22:57:57.443767+00:00",
+      "received_bytes": 32945,
+      "total_bytes": 32945,
+      "state_code": 1,
+      "interrupt_reason_code": 0,
+      "stored_hash_bytes": 0,
+      "page": {
+        "host": "crimeinsight.tbi.tn.gov",
+        "path": "/public/View/dispview.aspx",
+        "parameters": {}
+      },
+      "download_chain": [
+        {
+          "host": "crimeinsight.tbi.tn.gov",
+          "path": "/public/View/dispview.aspx",
+          "parameters": {
+            "download": [
+              "yes"
+            ],
+            "DownloadFormat": [
+              "CSV"
+            ],
+            "CsvDataFormat": [
+              "CSV_MD"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "report_definition_visits": [
+    {
+      "visit_utc": "2026-10-23T23:25:40.213622+00:00",
+      "host": "crimeinsight.tbi.tn.gov",
+      "path": "/public/View/ReportDefinitionSpawned.aspx",
+      "parameters": {
+        "ReportId": [
+          "52"
+        ],
+        "DetailedDefinition": [
+          "1"
+        ],
+        "SelectedMembersDisplayLimit": [
+          "10"
+        ],
+        "SummaryCubeId": [
+          "7"
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "No downloaded CSV contents or hashes recovered by this extraction",
+    "URLs do not recover HTTP request bodies or server-side selected members",
+    "A later definition-page visit does not establish an earlier query selection"
+  ]
+}
