@@ -1,0 +1,39 @@
+{
+  "base_commit": "dc24c999aac519266cecb279eed72248eb6d6c31",
+  "expected_counties": 95,
+  "expected_cells": 760,
+  "expected_published": 368,
+  "expected_unpublished": 392,
+  "categories": {
+    "453991": "tobacco_vape_establishments",
+    "451110": "sporting_goods_establishments",
+    "453310": "used_merchandise_establishments",
+    "447110": "gasoline_station_establishments",
+    "445120": "convenience_store_establishments",
+    "522291": "consumer_lending_establishments",
+    "812310": "laundry_service_establishments",
+    "441120": "used_auto_dealer_establishments"
+  },
+  "retained_sha256": {
+    "outputs/source-followup/cbp_retrieval_manifest.json": "573867d2ce2eafe812f3163e55afe1cc6515bafa653f1b852093549e8cae2583",
+    "outputs/source-followup/cbp2023_cell_evidence.csv": "ed6dcb4d35a445054463a81394290782aff5668c37f8908b004100729b2ef7da",
+    "outputs/source-followup/cbp2023_county_coverage.csv": "c29a7c4f4c6aecc9ff4a293c3e50f8b874ceecd81f0d942b9be66b2b1e2dac61",
+    "outputs/real-validation/snapshot_manifest.json": "959cd0f54c0b30fe3efd82106022d6ee24eab04f6ccdd0e6e96d0a5b867cdcea",
+    "work/real-validation/frozen/data/processed/tn_acs_county_data.csv": "160c035ab92325ee006ef15ca8a22e2fc97a67635c6d49c5040bbd93a5df3138",
+    "work/real-validation/frozen/data/processed/tn_cbp_business_exposure.csv": "9f0d424bcb2eb472f05b1fe588afaafa9dd9d2614520e039cdc379f81ccf2932",
+    "work/source-followup/cbp2023_453991.json": "c7d7c540b93b0395dce2979a659106c8484903ecff6da060eee1e6667a8ddb35",
+    "work/source-followup/cbp2023_451110.json": "e49dfe04e8641dc22eed4498eaf3233ac958ede1c965db6e3a7e753f284a1ee8",
+    "work/source-followup/cbp2023_453310.json": "cb1a97c8f4d59e74110ea645cb5352051302360891ab8c8d0b7c66371ab05c13",
+    "work/source-followup/cbp2023_447110.json": "b42b8f5eeefefb395d7f93434b99913a4b74a445860c96206fa7ea75336c4890",
+    "work/source-followup/cbp2023_445120.json": "e6e700b1d57178fe65bea9932ece361b8a4f7df5004a782e40d137674e9e5379",
+    "work/source-followup/cbp2023_522291.json": "a2647cb4b2e0b039da9f9b3fd9b2dbe449027dc77f61664d3f8b1c7cf0c871e1",
+    "work/source-followup/cbp2023_812310.json": "95ddc6336e47e7122ee19af05bdc1aeb6f6fbeea0d45faf0aeeede90d7043217",
+    "work/source-followup/cbp2023_441120.json": "a12c7be7c322646499606e658df4e1690e769cfbcaaa81a175040763a9452d59"
+  },
+  "repo_sha256_lf": {
+    "src/risk_scoring.py": "f295507e254c1455428dbb8fb214200a1ea19068b4748e5db37cc836b26e6ae8",
+    "research/effective_weights/results/terminal_weights.csv": "5c623abe696462e5e27c724a454bde6c0288efb76c2f28ab9aa5698e5ea67a52",
+    "docs/census_cbp_clarification_2026-10-28.md": "9dfa26f7677595d7f43f22926f35dad4525459fd0ee2276b2e85f28d0a3151c7"
+  },
+  "scores_sha256": "70821e90e66ff116f13d520317d0c390dce7843b2d5d9533ffbbb73bd67f1216"
+}
