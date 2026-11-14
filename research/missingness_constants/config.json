@@ -1,0 +1,235 @@
+{
+  "base_commit": "b6696459631c75d5c48dcfa09279e486209a90b5",
+  "release": "v1.0.1",
+  "expected_counties": 95,
+  "scores_sha256": "70821e90e66ff116f13d520317d0c390dce7843b2d5d9533ffbbb73bd67f1216",
+  "prepared_files": [
+    "tn_crime_weapons_inputs.csv",
+    "tn_explosives_activity_inputs.csv",
+    "tn_ffl_county_inputs.csv",
+    "tn_gang_explosives_activity_inputs.csv",
+    "tn_law_enforcement_ambush_inputs.csv",
+    "tn_tactical_access_inputs.csv"
+  ],
+  "constant_register": [
+    {
+      "indicator": "training_density_score",
+      "prepared_file": "tn_tactical_access_inputs.csv",
+      "prepared_field": "tactical_training_count",
+      "evidence_class": "unverified_zero_optional_input",
+      "code_locator": "src/data_collection.py:431-473",
+      "interpretation": "Legacy all-zero input is compatible with a template; creation history and observed-zero status are not established."
+    },
+    {
+      "indicator": "surplus_tactical_density_score",
+      "prepared_file": "tn_tactical_access_inputs.csv",
+      "prepared_field": "surplus_tactical_retail_count",
+      "evidence_class": "unverified_zero_optional_input",
+      "code_locator": "src/data_collection.py:431-473",
+      "interpretation": "Legacy all-zero input is compatible with a template; creation history and observed-zero status are not established."
+    },
+    {
+      "indicator": "gun_range_density_score",
+      "prepared_file": "tn_tactical_access_inputs.csv",
+      "prepared_field": "gun_range_count",
+      "evidence_class": "unverified_zero_optional_input",
+      "code_locator": "src/data_collection.py:431-473",
+      "interpretation": "Legacy all-zero input is compatible with a template; creation history and observed-zero status are not established."
+    },
+    {
+      "indicator": "collector_ffl_density_score",
+      "prepared_file": "tn_ffl_county_inputs.csv",
+      "prepared_field": "collector_ffl_count",
+      "evidence_class": "category_absent_from_retained_listing",
+      "code_locator": "src/ffl_processor.py:454-512",
+      "interpretation": "No type 03 rows in retained listing; category insertion yields zero. Does not establish absence of collector licenses in counties."
+    },
+    {
+      "indicator": "hate_crime_pressure_score",
+      "prepared_file": "tn_crime_weapons_inputs.csv",
+      "prepared_field": "hate_crime_count",
+      "evidence_class": "metric_absent_from_retained_mapping",
+      "code_locator": "src/crime_offense_processor.py:468-510",
+      "interpretation": "No contributing label in retained mapping; expected-column insertion yields zero. Separate targeted-harm measures are not interchangeable."
+    },
+    {
+      "indicator": "law_enforcement_assault_pressure_score",
+      "prepared_file": "tn_crime_weapons_inputs.csv",
+      "prepared_field": "law_enforcement_assault_count",
+      "evidence_class": "metric_absent_from_retained_mapping",
+      "code_locator": "src/crime_offense_processor.py:468-510",
+      "interpretation": "No contributing label in retained mapping; expected-column insertion yields zero. Separate targeted-harm measures are not interchangeable."
+    },
+    {
+      "indicator": "explosive_related_homicide_pressure_score",
+      "prepared_file": "tn_explosives_activity_inputs.csv",
+      "prepared_field": "explosive_related_homicide_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/explosives_processor.py",
+      "matrix": "explosives",
+      "offense": "Murder",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    },
+    {
+      "indicator": "explosive_related_arson_pressure_score",
+      "prepared_file": "tn_explosives_activity_inputs.csv",
+      "prepared_field": "explosive_related_arson_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/explosives_processor.py",
+      "matrix": "explosives",
+      "offense": "Arson",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    },
+    {
+      "indicator": "explosive_related_property_damage_pressure_score",
+      "prepared_file": "tn_explosives_activity_inputs.csv",
+      "prepared_field": "explosive_related_property_damage_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/explosives_processor.py",
+      "matrix": "explosives",
+      "offense": "Destruction/Damage/Vandalism",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    },
+    {
+      "indicator": "gang_explosive_homicide_pressure_score",
+      "prepared_file": "tn_gang_explosives_activity_inputs.csv",
+      "prepared_field": "gang_explosive_homicide_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/gang_explosives_processor.py",
+      "matrix": "gang_explosives",
+      "offense": "Murder",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    },
+    {
+      "indicator": "gang_explosive_arson_pressure_score",
+      "prepared_file": "tn_gang_explosives_activity_inputs.csv",
+      "prepared_field": "gang_explosive_arson_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/gang_explosives_processor.py",
+      "matrix": "gang_explosives",
+      "offense": "Arson",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    },
+    {
+      "indicator": "gang_explosive_property_damage_pressure_score",
+      "prepared_file": "tn_gang_explosives_activity_inputs.csv",
+      "prepared_field": "gang_explosive_property_damage_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/gang_explosives_processor.py",
+      "matrix": "gang_explosives",
+      "offense": "Destruction/Damage/Vandalism",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    },
+    {
+      "indicator": "le_ambush_weapon_law_pressure_score",
+      "prepared_file": "tn_law_enforcement_ambush_inputs.csv",
+      "prepared_field": "le_ambush_weapon_law_violation_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/law_enforcement_ambush_processor.py:46-111",
+      "matrix": "ambush",
+      "offense": "Weapon Law Violations",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    },
+    {
+      "indicator": "le_ambush_property_damage_pressure_score",
+      "prepared_file": "tn_law_enforcement_ambush_inputs.csv",
+      "prepared_field": "le_ambush_property_damage_count",
+      "evidence_class": "blank_export_cells",
+      "code_locator": "src/law_enforcement_ambush_processor.py:46-111",
+      "matrix": "ambush",
+      "offense": "Destruction/Damage/Vandalism of Property",
+      "interpretation": "Selected export cells are blank, then mapped to zero; absence of events is not verified."
+    }
+  ],
+  "retained_sha256": {
+    "data/raw/tn_crime_weapons_inputs.csv": "79e4e4209a1294e803281200dfa1a3a3c206f1a3f84e4b12c6ba9b7286eae416",
+    "data/raw/tn_explosives_activity_inputs.csv": "6a12ff22c391b28dfde2377014b37939631f1f0d28db84339a9026e9eae22719",
+    "data/raw/tn_ffl_county_inputs.csv": "2e78f954d5c2feb6b296e56d9f8eb0ee18b5e0eb73db20e957ac45f898050bdc",
+    "data/raw/tn_gang_explosives_activity_inputs.csv": "7d63bd24b7e9d1debdaf23df0c241ec0b9de112ef4293b5408c19cdd548d552e",
+    "data/raw/tn_law_enforcement_ambush_inputs.csv": "0dcbebd19d8bb26400fa6b32694c881ef6b67c232b9c4e8644e6521701cc5bf3",
+    "data/raw/tn_tactical_access_inputs.csv": "c703b859eee8a8179058f3a86350a8c8736dae742ed8c54cde449980c5126022",
+    "data/raw/tn_explosives_activity_raw_2024.csv": "9fb9f83884b26472b5b2d99c2cadcbff3778dd425c4daf801e96878a76c298d4",
+    "data/raw/tn_gang_explosives_activity_raw_2024.csv": "3157b679bc70fb9c6825be5c36f74ba3654f0cf780f13e529cc64da940b69e3f",
+    "data/raw/tn_law_enforcement_ambush_raw_2024.csv": "6f8634fbe0e5b8971c5478a6454dcf518a510c97e625c2eb165eff3da718b143",
+    "data/raw/atf_ffl_listing.csv": "6fae6f692ca96d5c96bba33560b8691603f622e6802fdaeff08e3fb42683526a",
+    "outputs/tables/crime_offense_label_mapping_validation.csv": "233f66c5edd280bf1c0da58c8aa441e057d24313c5bb397c15f34bde22328ec6"
+  },
+  "code_sha256_lf": {
+    "src/risk_scoring.py": "f295507e254c1455428dbb8fb214200a1ea19068b4748e5db37cc836b26e6ae8",
+    "src/data_collection.py": "30b6c975f52d367c516f392630bde9f7fc707d994b5dc6591fc1363ba5c542b0",
+    "src/ffl_processor.py": "9f8ae20e868c0ada64a33c7e6d06c91cb3aa3d9be44ef5b0b4142fbfe57ce610",
+    "src/crime_offense_processor.py": "376344efd91d606ea9fb7fa7b031c021b93ded8b461ccb9ffc7f6e4c90a3b225",
+    "src/explosives_processor.py": "6ab3118ba3d678760ce862631f606f329e53883fd3bfca688ec5ad84e5b9b73a",
+    "src/gang_explosives_processor.py": "77ca1e61265360c4f97da18e763b0e4005665b1d0a3999836d42d5ee57226591",
+    "src/law_enforcement_ambush_processor.py": "6806e302f6f0b68027324088dd39082f3febd0234171d1429d042f584114b1c4",
+    "research/tbi_measurement_trace/trace.py": "4bd2eb267cd789c3db218e8a41b9afd532ac5f004ae1bd30e512ad5bc8ba098e",
+    "research/effective_weights/results/terminal_weights.csv": "5c623abe696462e5e27c724a454bde6c0288efb76c2f28ab9aa5698e5ea67a52"
+  },
+  "sensitivity_exclusion_sets": {
+    "C1": [
+      "gun_range_density_score",
+      "surplus_tactical_density_score",
+      "training_density_score"
+    ],
+    "C2": [
+      "collector_ffl_density_score",
+      "hate_crime_pressure_score",
+      "law_enforcement_assault_pressure_score"
+    ],
+    "C3": [
+      "explosive_related_arson_pressure_score",
+      "explosive_related_homicide_pressure_score",
+      "explosive_related_property_damage_pressure_score",
+      "gang_explosive_arson_pressure_score",
+      "gang_explosive_homicide_pressure_score",
+      "gang_explosive_property_damage_pressure_score",
+      "le_ambush_property_damage_pressure_score",
+      "le_ambush_weapon_law_pressure_score"
+    ],
+    "C4": [
+      "collector_ffl_density_score",
+      "explosive_related_arson_pressure_score",
+      "explosive_related_homicide_pressure_score",
+      "explosive_related_property_damage_pressure_score",
+      "gang_explosive_arson_pressure_score",
+      "gang_explosive_homicide_pressure_score",
+      "gang_explosive_property_damage_pressure_score",
+      "gun_range_density_score",
+      "hate_crime_pressure_score",
+      "law_enforcement_assault_pressure_score",
+      "le_ambush_property_damage_pressure_score",
+      "le_ambush_weapon_law_pressure_score",
+      "surplus_tactical_density_score",
+      "training_density_score"
+    ],
+    "D1": [
+      "gang_explosive_arson_pressure_score",
+      "gang_explosive_homicide_pressure_score",
+      "gang_explosive_property_damage_pressure_score",
+      "gang_explosive_total_pressure_score",
+      "gang_explosive_violent_pressure_score",
+      "gang_explosive_weapon_law_pressure_score",
+      "gang_related_total_pressure_score"
+    ],
+    "CD": [
+      "collector_ffl_density_score",
+      "explosive_related_arson_pressure_score",
+      "explosive_related_homicide_pressure_score",
+      "explosive_related_property_damage_pressure_score",
+      "gang_explosive_arson_pressure_score",
+      "gang_explosive_homicide_pressure_score",
+      "gang_explosive_property_damage_pressure_score",
+      "gang_explosive_total_pressure_score",
+      "gang_explosive_violent_pressure_score",
+      "gang_explosive_weapon_law_pressure_score",
+      "gang_related_total_pressure_score",
+      "gun_range_density_score",
+      "hate_crime_pressure_score",
+      "law_enforcement_assault_pressure_score",
+      "le_ambush_property_damage_pressure_score",
+      "le_ambush_weapon_law_pressure_score",
+      "surplus_tactical_density_score",
+      "training_density_score"
+    ]
+  }
+}
