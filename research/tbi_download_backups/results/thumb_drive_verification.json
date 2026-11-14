@@ -1,0 +1,31 @@
+{
+  "original": {
+    "files_checked": 170,
+    "mismatches": 0
+  },
+  "frozen": {
+    "files_checked": 170,
+    "mismatches": 0
+  },
+  "release_assets": {
+    "final_report.pdf": true,
+    "START_HERE.md": true,
+    "tennessee-financial-security-risk-model-v1.0.1.zip": true,
+    "tennessee-financial-security-risk-model-v1.0.1.zip.sha256": true,
+    "verification.json": true
+  },
+  "thumb_drive_prepared_input_sha256": "05b083f572a7c9183a8c08fe7c153de68072580e5f3a9b329fa9f5d978ec0baa",
+  "prepared_input_matches_frozen": true,
+  "bounded_scan": {
+    "directories": 56,
+    "files": 483,
+    "csv_count": 157,
+    "zip_count": 5,
+    "archive_csv_headers": 461,
+    "header_or_size_hits": [],
+    "zip_hits": [],
+    "errors": []
+  },
+  "note_sha256_lf": "8f4ee7232f540537191e82e41ddae9cfe8e3c780f98b480190a789f440268f9b",
+  "captured_utc": "2026-11-14T02:53:45.549969+00:00"
+}
