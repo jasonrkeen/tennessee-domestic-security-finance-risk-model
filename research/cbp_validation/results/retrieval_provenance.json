@@ -1,0 +1,122 @@
+[
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "453991",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:15.227770+00:00",
+    "sha256": "c7d7c540b93b0395dce2979a659106c8484903ecff6da060eee1e6667a8ddb35",
+    "rows": 50,
+    "column": "tobacco_vape_establishments"
+  },
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "451110",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:15.228229+00:00",
+    "sha256": "e49dfe04e8641dc22eed4498eaf3233ac958ede1c965db6e3a7e753f284a1ee8",
+    "rows": 26,
+    "column": "sporting_goods_establishments"
+  },
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "453310",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:15.228542+00:00",
+    "sha256": "cb1a97c8f4d59e74110ea645cb5352051302360891ab8c8d0b7c66371ab05c13",
+    "rows": 34,
+    "column": "used_merchandise_establishments"
+  },
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "447110",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:15.228835+00:00",
+    "sha256": "b42b8f5eeefefb395d7f93434b99913a4b74a445860c96206fa7ea75336c4890",
+    "rows": 93,
+    "column": "gasoline_station_establishments"
+  },
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "445120",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:16.455664+00:00",
+    "sha256": "e6e700b1d57178fe65bea9932ece361b8a4f7df5004a782e40d137674e9e5379",
+    "rows": 54,
+    "column": "convenience_store_establishments"
+  },
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "522291",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:16.457014+00:00",
+    "sha256": "a2647cb4b2e0b039da9f9b3fd9b2dbe449027dc77f61664d3f8b1c7cf0c871e1",
+    "rows": 57,
+    "column": "consumer_lending_establishments"
+  },
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "812310",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:16.458202+00:00",
+    "sha256": "95ddc6336e47e7122ee19af05bdc1aeb6f6fbeea0d45faf0aeeede90d7043217",
+    "rows": 9,
+    "column": "laundry_service_establishments"
+  },
+  {
+    "source_url": "https://api.census.gov/data/2023/cbp",
+    "query": {
+      "get": "NAME,NAICS2017_LABEL,ESTAB",
+      "for": "county:*",
+      "in": "state:47",
+      "NAICS2017": "441120",
+      "LFO": "001",
+      "EMPSZES": "001"
+    },
+    "retrieved_utc": "2026-10-26T14:59:16.486863+00:00",
+    "sha256": "a12c7be7c322646499606e658df4e1690e769cfbcaaa81a175040763a9452d59",
+    "rows": 45,
+    "column": "used_auto_dealer_establishments"
+  }
+]

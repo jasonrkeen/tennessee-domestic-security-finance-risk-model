@@ -1,0 +1,30 @@
+{
+  "cells": 760,
+  "published_cells": 368,
+  "unpublished_cells": 392,
+  "fully_published_counties": 8,
+  "incomplete_counties": 87,
+  "no_published_categories": [
+    "Moore",
+    "Van Buren"
+  ],
+  "frozen_cache_rows": 93,
+  "absent_cache_counties": [
+    "Moore",
+    "Van Buren"
+  ],
+  "original_response_hashes_verified": 8,
+  "prior_cell_ledger_matched": true,
+  "published_values_match_frozen_cache_and_release": true,
+  "unpublished_release_values_are_legacy_zeros": true,
+  "retrieval_vintage": "2026-10-26 retained responses for 2023 CBP; not original collection logs",
+  "live_queries_performed": false,
+  "scoring_bounds_computed": false,
+  "document_sha256_lf": {
+    "INTENDED_USE_CHARTER.md": "4b5bebfb796e3150823c07df4c8ce34fe60fa3d2b2ca6b7ade2d4cd45b70edcf",
+    "BOUNDING_PROTOCOL.md": "8ea1a9b835b037eb85b227ef2cdea8381e023b41dc81b6442b837c1923590be7"
+  },
+  "config_sha256_lf": "b88f2bb7d0649faa0d3da70c5fe36b176f89df22183fc9ecddf1fbcf8a41fb26",
+  "code_sha256_lf": "06faf8b8f7ad8a354e1c87320c4b75265952049f1c07593e25d30326d3637f34",
+  "mask_sha256": "e1da429ab1f1104b812fdbef31d5f1c64a74011a93047c721f5b3259db9a9de2"
+}
