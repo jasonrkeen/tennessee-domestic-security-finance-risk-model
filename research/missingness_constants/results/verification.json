@@ -1,0 +1,19 @@
+{
+  "active_indicators": 74,
+  "constant_indicators": 14,
+  "constant_weight_percent": 7.69025,
+  "constant_score_points": 3.845125,
+  "evidence_classes": {
+    "blank_export_cells": 8,
+    "unverified_zero_optional_input": 3,
+    "metric_absent_from_retained_mapping": 2,
+    "category_absent_from_retained_listing": 1
+  },
+  "retained_inputs_verified": 12,
+  "code_files_verified": 9,
+  "original_inputs_written": false,
+  "candidate_scores_computed": false,
+  "config_sha256_lf": "3f369d2023ef27add5465a26693ce91a063127a875783b8113a07e15ddde0cfa",
+  "audit_sha256_lf": "003a5fa440c8fc6d93d61591dab02546e25c530e497c4042d27a0b0e8a94469f",
+  "protocol_sha256_lf": "b982f711a76ba08f2073a3922718ccd244a7ed9101287a98e12667555675078b"
+}
