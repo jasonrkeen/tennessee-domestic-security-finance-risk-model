@@ -1,0 +1,15 @@
+{
+  "baseline_commit": "35ab5cc1635a7d1499998e7409d005bfc01bbeb6",
+  "source_sha256_lf": {
+    "src/risk_scoring.py": "f295507e254c1455428dbb8fb214200a1ea19068b4748e5db37cc836b26e6ae8",
+    "src/sensitivity_analysis.py": "b2e2fbac148cd0a6131dd05880f1a048a5858ecf53a161dc6f420fd047667571",
+    "src/acled_processor.py": "18b1ecee6ed81057678d17a0a33a60688c9003c76fa5b872495e1f5c74dd7918",
+    "src/crime_offense_processor.py": "376344efd91d606ea9fb7fa7b031c021b93ded8b461ccb9ffc7f6e4c90a3b225"
+  },
+  "final_score": "final_domestic_security_risk_score",
+  "disruption_score": "disaster_disruption_vulnerability_score",
+  "fallback_score": "infrastructure_disruption_score",
+  "output_dir": "research/effective_weights/results",
+  "rtol": 1e-12,
+  "atol": 1e-12
+}
