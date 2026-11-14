@@ -1,0 +1,26 @@
+{
+  "protocol_commit": "448e8d15e2a547d13bf9d083e079e40fc04fd933",
+  "protocol_amended": false,
+  "scores_sha256": "70821e90e66ff116f13d520317d0c390dce7843b2d5d9533ffbbb73bd67f1216",
+  "counties": 95,
+  "variants": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "D1",
+    "CD"
+  ],
+  "duplicate_pairs_checked": 7,
+  "baseline_reconstruction_passed": true,
+  "input_and_dependency_hashes_unchanged": true,
+  "production_pipeline_run": false,
+  "config_sha256_lf": "644c3ed93bb308d4933914004fd4ac01a4f5683802bd494356c2a33ca7506daa",
+  "code_sha256_lf": "64d5bd0be763f59b0423493bf2cf31c1fcf9246e686d3eb1df135aa50b6c1aa1",
+  "result_sha256": {
+    "county_variants.csv": "5c62d21d3fa26a9b7b7098a0389535431687822d66e6cdcb9552d4c1e7caa868",
+    "duplicate_checks.csv": "3377546ba8ca478343024dea55a45b3386a259f9197465aab1b81174e24592b5",
+    "largest_movement_context.csv": "a5a61c7cfaa818f2e9a1f882ceb1b408e4bafe433fa2a4833661d1fa5fdb85dc",
+    "summary.csv": "eb64272c1b62f92080363b8826c3bd2be0a7a846f01335795cedfd0b8c3d32fb"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "protocol_commit": "448e8d15e2a547d13bf9d083e079e40fc04fd933",
+  "scores_sha256": "70821e90e66ff116f13d520317d0c390dce7843b2d5d9533ffbbb73bd67f1216",
+  "pinned_sha256_lf": {
+    "research/missingness_constants/SENSITIVITY_PROTOCOL.md": "b982f711a76ba08f2073a3922718ccd244a7ed9101287a98e12667555675078b",
+    "research/missingness_constants/config.json": "3f369d2023ef27add5465a26693ce91a063127a875783b8113a07e15ddde0cfa",
+    "research/indicator_overlap/analyze.py": "81d9ea40a36721e990fbb143b89a147f466ec0d0625a13a31e7d70b794dba51b",
+    "research/indicator_overlap/config.json": "eea75deb64445ce7c42df6b716b8f9894bb46edbed4250c4eb724da612c2d0af",
+    "research/effective_weights/audit.py": "88166ec51a71b0c228f3732b65946341746be5aace75975347c0ed3e70680fdb",
+    "research/effective_weights/config.json": "c2037b55514ab06ab75038cc74a94a4e2c0b8f4b7c2869127de8d5459c429bda",
+    "research/effective_weights/results/terminal_weights.csv": "5c623abe696462e5e27c724a454bde6c0288efb76c2f28ab9aa5698e5ea67a52"
+  },
+  "rank_round_decimals": 10,
+  "top_k": 10,
+  "largest_movement_k": 5,
+  "rtol": 1e-12,
+  "atol": 1e-12,
+  "variant_order": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "D1",
+    "CD"
+  ]
+}
