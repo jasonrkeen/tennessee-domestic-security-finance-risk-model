@@ -1,0 +1,23 @@
+{
+  "scope": "Retained local evidence; no new acquisition or source certification",
+  "base_commit": "f916d315927e9d6960f5c21be4db302616ebd6c7",
+  "snapshot_captured_utc": "2026-10-26T11:45:04.297628+00:00",
+  "retained_files_verified": 11,
+  "historical_manifest_matches": true,
+  "inputs_unchanged": true,
+  "lineage_checks": 54,
+  "all_lineage_checks_passed": true,
+  "gang_only_offense": "Justifiable Homicide",
+  "gang_only_offense_blank_count": 95,
+  "config_sha256_lf": "6cdd81bfb49c75dcf77535f93dbce78b1409daa20d33989717966479ae1e64a4",
+  "analysis_sha256_lf": "4bd2eb267cd789c3db218e8a41b9afd532ac5f004ae1bd30e512ad5bc8ba098e",
+  "results_sha256": {
+    "blank_diagnostics.csv": "704fb45d4874092a71b52c902eb428f561a373536ea4fe37b1cda323cbca866a",
+    "cell_comparisons.csv": "1c80e68bdb6f46d7e5bb5bf91bb151c55964d38ba6fcdcf13419caeaabf2de72",
+    "common_offense_differences.csv": "46238deaaa8dba215743f819e35588cc8e8a94f28f5e9c5f3c4195d39456ba17",
+    "header_evidence.csv": "e695440584575f907659e31e0140730ed3680c1bfdcbdca58821082ec81e0a1d",
+    "lineage_checks.csv": "1dabb55c094650af7fc46c2b54ee6a882047a49cb26b1de01ed6dda5ef690cd3",
+    "mapping_checks.csv": "991a7b849740b5c2c90ee800dc91786d3fe4de22efa5772e1eecd2cb10f8ec10",
+    "selected_columns.csv": "142c195b74c02983dba4a4772d235f2270920e13f5804a19012a4da1cb01fd1c"
+  }
+}

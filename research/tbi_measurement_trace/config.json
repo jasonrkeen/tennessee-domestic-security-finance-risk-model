@@ -1,0 +1,29 @@
+{
+  "base_commit": "f916d315927e9d6960f5c21be4db302616ebd6c7",
+  "release": "v1.0.1",
+  "snapshot_manifest_sha256": "959cd0f54c0b30fe3efd82106022d6ee24eab04f6ccdd0e6e96d0a5b867cdcea",
+  "retained_files": {
+    "data/raw/tn_explosives_activity_raw_2024.csv": "9fb9f83884b26472b5b2d99c2cadcbff3778dd425c4daf801e96878a76c298d4",
+    "data/raw/tn_gang_explosives_activity_raw_2024.csv": "3157b679bc70fb9c6825be5c36f74ba3654f0cf780f13e529cc64da940b69e3f",
+    "data/raw/tn_gang_activity_raw_2024.csv": "e5c686fda9eac374c2d75a80873b5e45dc8e7801b646364d26d3f6577cb41c9c",
+    "data/raw/crimes_clearances_by_offense_type_2024.csv": "bd421b257968e2c99ecb8b67db61dc8e8899e7410789af64f9c626608413f852",
+    "data/raw/tn_explosives_activity_inputs.csv": "6a12ff22c391b28dfde2377014b37939631f1f0d28db84339a9026e9eae22719",
+    "data/raw/tn_gang_explosives_activity_inputs.csv": "7d63bd24b7e9d1debdaf23df0c241ec0b9de112ef4293b5408c19cdd548d552e",
+    "data/raw/tn_gang_activity_inputs.csv": "4d07941d782717db041d20cc7835a297e686da3c1ad0267f226ccbc82f47c8b1",
+    "data/raw/tn_crime_rate_inputs.csv": "05b083f572a7c9183a8c08fe7c153de68072580e5f3a9b329fa9f5d978ec0baa",
+    "outputs/tables/tn_explosives_activity_mapping_validation.csv": "9e6791738a6a4443f46a0564c0bbd121bc6e21dacc03306abe538e676d589ae7",
+    "outputs/tables/tn_gang_activity_mapping_validation.csv": "dc9f0dd743d9439db1ed448e290418d39d4ac2be983d331e9b05f84167a23004",
+    "outputs/tables/tn_gang_explosives_activity_mapping_validation.csv": "4e46b65b5286c24a52aef8f224c7ec29d85ae74f8d6fb390a565f2c3d85dfdc8"
+  },
+  "code_sha256_lf": {
+    "src/explosives_processor.py": "6ab3118ba3d678760ce862631f606f329e53883fd3bfca688ec5ad84e5b9b73a",
+    "src/gang_explosives_processor.py": "77ca1e61265360c4f97da18e763b0e4005665b1d0a3999836d42d5ee57226591",
+    "src/gang_activity_processor.py": "e4d4d24eceb17d7187ba4e47757834e5dd5618c1b510c0a848afd83c2dcb5617",
+    "src/crime_rate_processor.py": "a90a5be7dde9ee033a4f301295b74ac3196199e5e71d312906ef79732f94d46b",
+    "src/risk_scoring.py": "f295507e254c1455428dbb8fb214200a1ea19068b4748e5db37cc836b26e6ae8"
+  },
+  "scores_sha256": "70821e90e66ff116f13d520317d0c390dce7843b2d5d9533ffbbb73bd67f1216",
+  "rtol": 1e-12,
+  "atol": 1e-12,
+  "output_dir": "research/tbi_measurement_trace/results"
+}

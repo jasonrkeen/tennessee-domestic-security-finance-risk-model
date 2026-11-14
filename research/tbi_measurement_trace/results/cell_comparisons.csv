@@ -1,0 +1,3 @@
+pair,counties,offenses,cells,exact_text_matches,both_blank,both_explicit_zero,numeric_or_blank_mismatches
+explosives_vs_gang_explosives,95,52,4940,4940,4907,0,0
+gang_vs_all_clearances,95,51,4845,4835,1738,0,10

@@ -1,0 +1,55 @@
+check,counties,matching_counties,max_absolute_difference
+explosives: export -> prepared explosive_related_total_offense_count,95,95,0
+explosives: prepared -> released explosive_related_total_offense_count,95,95,0
+explosives: export -> prepared explosive_related_violent_offense_count,95,95,0
+explosives: prepared -> released explosive_related_violent_offense_count,95,95,0
+explosives: export -> prepared explosive_related_weapon_law_violation_count,95,95,0
+explosives: prepared -> released explosive_related_weapon_law_violation_count,95,95,0
+explosives: export -> prepared explosive_related_homicide_count,95,95,0
+explosives: prepared -> released explosive_related_homicide_count,95,95,0
+explosives: export -> prepared explosive_related_arson_count,95,95,0
+explosives: prepared -> released explosive_related_arson_count,95,95,0
+explosives: export -> prepared explosive_related_property_damage_count,95,95,0
+explosives: prepared -> released explosive_related_property_damage_count,95,95,0
+gang_explosives: export -> prepared gang_explosive_total_offense_count,95,95,0
+gang_explosives: prepared -> released gang_explosive_total_offense_count,95,95,0
+gang_explosives: export -> prepared gang_explosive_violent_offense_count,95,95,0
+gang_explosives: prepared -> released gang_explosive_violent_offense_count,95,95,0
+gang_explosives: export -> prepared gang_explosive_weapon_law_violation_count,95,95,0
+gang_explosives: prepared -> released gang_explosive_weapon_law_violation_count,95,95,0
+gang_explosives: export -> prepared gang_explosive_homicide_count,95,95,0
+gang_explosives: prepared -> released gang_explosive_homicide_count,95,95,0
+gang_explosives: export -> prepared gang_explosive_arson_count,95,95,0
+gang_explosives: prepared -> released gang_explosive_arson_count,95,95,0
+gang_explosives: export -> prepared gang_explosive_property_damage_count,95,95,0
+gang_explosives: prepared -> released gang_explosive_property_damage_count,95,95,0
+gang: export -> prepared gang_related_total_crime_count,95,95,0
+gang: prepared -> released gang_related_total_crime_count,95,95,0
+gang: export -> prepared gang_related_violent_crime_count,95,95,0
+gang: prepared -> released gang_related_violent_crime_count,95,95,0
+gang: export -> prepared gang_related_weapon_law_violation_count,95,95,0
+gang: prepared -> released gang_related_weapon_law_violation_count,95,95,0
+gang offense sum -> retained overall crime count,95,95,0
+retained overall count -> released overall count,95,95,0
+explosive vs gang-explosive released total_offense_count,95,95,0
+explosive vs gang-explosive released violent_offense_count,95,95,0
+explosive vs gang-explosive released weapon_law_violation_count,95,95,0
+explosive vs gang-explosive released homicide_count,95,95,0
+explosive vs gang-explosive released arson_count,95,95,0
+explosive vs gang-explosive released property_damage_count,95,95,0
+explosive_related: count/population -> normalized total,95,95,7.1054273576e-15
+explosive_related: count/population -> normalized violent,95,95,3.5527136788e-15
+explosive_related: count/population -> normalized weapon_law,95,95,7.1054273576e-15
+explosive_related: count/population -> normalized homicide,95,95,0
+explosive_related: count/population -> normalized arson,95,95,0
+explosive_related: count/population -> normalized property_damage,95,95,0
+gang_explosive: count/population -> normalized total,95,95,7.1054273576e-15
+gang_explosive: count/population -> normalized violent,95,95,3.5527136788e-15
+gang_explosive: count/population -> normalized weapon_law,95,95,7.1054273576e-15
+gang_explosive: count/population -> normalized homicide,95,95,0
+gang_explosive: count/population -> normalized arson,95,95,0
+gang_explosive: count/population -> normalized property_damage,95,95,0
+gang_related_total_crime_count: count/population -> normalized score,95,95,7.1054273576e-15
+overall_crime_count_2024: count/population -> normalized score,95,95,7.1054273576e-15
+gang normalized total -> overall normalized count,95,95,0
+explosive composite -> gang-explosive composite,95,95,0

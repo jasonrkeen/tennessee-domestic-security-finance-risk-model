@@ -1,0 +1,13 @@
+export,header,row_1based,present,distinct_nonblank_values
+explosives,Measures,4,True,Number of Crimes | Number of Offenses
+explosives,Incident Date,5,True,2024
+explosives,Gang Activity,,False,
+explosives,Type of Weapon/Force Involved,7,True,Explosives
+gang_explosives,Measures,4,True,Number of Crimes | Number of Offenses
+gang_explosives,Incident Date,5,True,2024
+gang_explosives,Gang Activity,8,True,All Gang Activities
+gang_explosives,Type of Weapon/Force Involved,7,True,Explosives
+gang,Measures,4,True,Number of Crimes | Number of Offenses
+gang,Incident Date,6,True,2024
+gang,Gang Activity,5,True,All Gang Activities
+gang,Type of Weapon/Force Involved,,False,
