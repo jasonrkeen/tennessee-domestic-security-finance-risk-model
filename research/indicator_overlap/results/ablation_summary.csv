@@ -1,0 +1,24 @@
+partition,family_removed,excluded_weight_percent,rank_spearman,median_absolute_rank_change,maximum_absolute_rank_change,rank_changes_at_least_threshold,baseline_top_count,candidate_top_count,top_retained,top_jaccard,top_entrants,top_exits,mean_score_change
+source_family,ACLED_events,15,0.973726203807,2,28,9,10,10,9,0.818181818182,Hancock,Hamilton,4.98466885432
+source_family,ACS_socioeconomic,23.64,0.75664893617,10,67,49,10,10,6,0.428571428571,Dickson | Knox | Sevier | Tipton,Hardeman | Jackson | Lake | Lauderdale,-5.27118789066
+source_family,ATF_FFL,4.95,0.985638297872,2,17,6,10,10,10,1,,,0.160496983396
+source_family,CBP_business,10.36,0.913941769317,8,38,40,10,10,7,0.538461538462,Fentress | Hancock | Haywood,Coffee | Hamblen | Hamilton,1.07060657012
+source_family,FDIC_banking,4.8,0.987248040314,2,17,3,10,10,8,0.666666666667,Hardin | Obion,Jackson | Lake,-1.99760571849
+source_family,FEMA_declarations,12.9,0.929115341545,6,35,26,10,10,7,0.538461538462,Haywood | Sullivan | Washington,Coffee | Jackson | Lake,-1.74501689485
+source_family,TBI_public_safety,24.5,0.917063269877,7,40,36,10,10,5,0.333333333333,Clay | Hancock | Hardin | Putnam | Scott,Coffee | Hamblen | Hardeman | Lake | Lauderdale,3.64436208846
+source_family,optional_local_access,3.85,1,0,0,0,10,10,10,1,,,-0.680183653054
+component_family,ACLED_events,15,0.973726203807,2,28,9,10,10,9,0.818181818182,Hancock,Hamilton,4.98466885432
+component_family,FEMA_disasters,12.9,0.929115341545,6,35,26,10,10,7,0.538461538462,Haywood | Sullivan | Washington,Coffee | Jackson | Lake,-1.74501689485
+component_family,FFL_licensing,4.95,0.985638297872,2,17,6,10,10,10,1,,,0.160496983396
+component_family,ambush,2.465,0.998726203807,0,11,1,10,10,10,1,,,0.485808811364
+component_family,banking_access,4.8,0.987248040314,2,17,3,10,10,8,0.666666666667,Hardin | Obion,Jackson | Lake,-1.99760571849
+component_family,cash_retail,6,0.974076147816,4,15,14,10,10,8,0.666666666667,Hancock | Hardin,Coffee | Hardeman,0.440417111257
+component_family,crime_weapons,8,0.986058230683,2,17,3,10,10,8,0.666666666667,Hancock | Hardin,Hardeman | Lauderdale,0.511996346366
+component_family,explosives,2.6,0.997830347144,0,9,0,10,10,9,0.818181818182,Hancock,Hardeman,0.315099584287
+component_family,gang_activity,3.6,0.997718365062,1,5,0,10,10,9,0.818181818182,Hancock,Coffee,0.463505537875
+component_family,gang_explosives,2.6,0.997830347144,0,9,0,10,10,9,0.818181818182,Hancock,Hardeman,0.315099584287
+component_family,household_stress,23.64,0.75664893617,10,67,49,10,10,6,0.428571428571,Dickson | Knox | Sevier | Tipton,Hardeman | Jackson | Lake | Lauderdale,-5.27118789066
+component_family,overall_crime,3.75,0.993631019037,2,8,0,10,10,9,0.818181818182,Hancock,Coffee,0.353300861327
+component_family,tactical_access,6.05,0.983482642777,2,21,5,10,10,9,0.818181818182,Hancock,Coffee,-0.260729453009
+component_family,targeted_harm,1.485,0.998880179171,0,5,0,10,10,9,0.818181818182,Hancock,Lake,0.41205674896
+component_family,tobacco_retail,2.16,0.982642777156,3,13,7,10,10,9,0.818181818182,Hancock,Coffee,0.139675371589

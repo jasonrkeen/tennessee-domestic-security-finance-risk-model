@@ -1,0 +1,7 @@
+left,right,n,exact_values_equal,max_absolute_difference,joint_zero_rows
+gang_related_total_crime_count,overall_crime_count_2024,95,True,0,0
+gang_related_total_pressure_score,overall_crime_count_pressure_score,95,True,0,1
+explosive_related_total_offense_count,gang_explosive_total_offense_count,95,True,0,71
+explosive_related_violent_offense_count,gang_explosive_violent_offense_count,95,True,0,82
+explosive_related_weapon_law_violation_count,gang_explosive_weapon_law_violation_count,95,True,0,76
+explosive_related_pressure_score,gang_explosive_pressure_score,95,True,0,0
