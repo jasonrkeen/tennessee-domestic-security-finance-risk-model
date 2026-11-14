@@ -1,0 +1,348 @@
+{
+  "release": "v1.0.1",
+  "source_commit": "35ab5cc1635a7d1499998e7409d005bfc01bbeb6",
+  "audit_commit": "f3d655d6bc37b5de609d717ae82cc1b6317f9483",
+  "scope": "Published baseline only; fixed normalization and FEMA fallback; no score-category reassignment",
+  "scores_sha256": "70821e90e66ff116f13d520317d0c390dce7843b2d5d9533ffbbb73bd67f1216",
+  "expected_counties": 95,
+  "audit_sha256_lf": {
+    "research/effective_weights/audit.py": "88166ec51a71b0c228f3732b65946341746be5aace75975347c0ed3e70680fdb",
+    "research/effective_weights/config.json": "c2037b55514ab06ab75038cc74a94a4e2c0b8f4b7c2869127de8d5459c429bda"
+  },
+  "partitions": [
+    "source_family",
+    "component_family"
+  ],
+  "rank_round_decimals": 10,
+  "top_k": 10,
+  "high_correlation_threshold": 0.8,
+  "very_high_correlation_threshold": 0.95,
+  "rtol": 1e-12,
+  "atol": 1e-12,
+  "output_dir": "research/indicator_overlap/results",
+  "indicator_families": {
+    "acled_fatality_pressure_score": {
+      "source_family": "ACLED_events",
+      "component_family": "ACLED_events"
+    },
+    "aggravated_assault_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "arson_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "collector_ffl_density_score": {
+      "source_family": "ATF_FFL",
+      "component_family": "FFL_licensing"
+    },
+    "consumer_lending_establishments_per_10k_score": {
+      "source_family": "CBP_business",
+      "component_family": "cash_retail"
+    },
+    "convenience_store_establishments_per_10k_score": {
+      "source_family": "CBP_business",
+      "component_family": "cash_retail"
+    },
+    "dealer_ffl_density_score": {
+      "source_family": "ATF_FFL",
+      "component_family": "FFL_licensing"
+    },
+    "destructive_device_ffl_density_score": {
+      "source_family": "ATF_FFL",
+      "component_family": "FFL_licensing"
+    },
+    "disaster_declaration_score": {
+      "source_family": "FEMA_declarations",
+      "component_family": "FEMA_disasters"
+    },
+    "disaster_type_diversity_score": {
+      "source_family": "FEMA_declarations",
+      "component_family": "FEMA_disasters"
+    },
+    "explosive_related_arson_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "explosives"
+    },
+    "explosive_related_homicide_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "explosives"
+    },
+    "explosive_related_property_damage_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "explosives"
+    },
+    "explosive_related_total_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "explosives"
+    },
+    "explosive_related_violent_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "explosives"
+    },
+    "explosive_related_weapon_law_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "explosives"
+    },
+    "ffl_density_score": {
+      "source_family": "ATF_FFL",
+      "component_family": "FFL_licensing"
+    },
+    "gang_explosive_arson_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_explosives"
+    },
+    "gang_explosive_homicide_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_explosives"
+    },
+    "gang_explosive_property_damage_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_explosives"
+    },
+    "gang_explosive_total_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_explosives"
+    },
+    "gang_explosive_violent_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_explosives"
+    },
+    "gang_explosive_weapon_law_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_explosives"
+    },
+    "gang_related_aggravated_assault_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_activity"
+    },
+    "gang_related_drug_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_activity"
+    },
+    "gang_related_homicide_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_activity"
+    },
+    "gang_related_robbery_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_activity"
+    },
+    "gang_related_total_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_activity"
+    },
+    "gang_related_violent_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_activity"
+    },
+    "gang_related_weapon_law_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "gang_activity"
+    },
+    "gasoline_station_establishments_per_10k_score": {
+      "source_family": "CBP_business",
+      "component_family": "cash_retail"
+    },
+    "gun_range_density_score": {
+      "source_family": "optional_local_access",
+      "component_family": "tactical_access"
+    },
+    "hate_crime_intimidation_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "targeted_harm"
+    },
+    "hate_crime_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "hate_crime_property_damage_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "targeted_harm"
+    },
+    "hate_crime_total_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "targeted_harm"
+    },
+    "hate_crime_violent_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "targeted_harm"
+    },
+    "hate_crime_weapon_law_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "targeted_harm"
+    },
+    "homicide_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "importer_ffl_density_score": {
+      "source_family": "ATF_FFL",
+      "component_family": "FFL_licensing"
+    },
+    "income_stress_score": {
+      "source_family": "ACS_socioeconomic",
+      "component_family": "household_stress"
+    },
+    "kidnapping_abduction_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "laundry_service_establishments_per_10k_score": {
+      "source_family": "CBP_business",
+      "component_family": "cash_retail"
+    },
+    "law_enforcement_assault_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "le_ambush_intimidation_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "ambush"
+    },
+    "le_ambush_property_damage_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "ambush"
+    },
+    "le_ambush_total_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "ambush"
+    },
+    "le_ambush_violent_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "ambush"
+    },
+    "le_ambush_weapon_law_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "ambush"
+    },
+    "low_branch_access_score": {
+      "source_family": "FDIC_banking",
+      "component_family": "banking_access"
+    },
+    "low_deposit_depth_score": {
+      "source_family": "FDIC_banking",
+      "component_family": "banking_access"
+    },
+    "manufacturer_ffl_density_score": {
+      "source_family": "ATF_FFL",
+      "component_family": "FFL_licensing"
+    },
+    "overall_crime_count_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "overall_crime"
+    },
+    "overall_crime_rate_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "overall_crime"
+    },
+    "pawnbroker_ffl_density_score": {
+      "source_family": "ATF_FFL",
+      "component_family": "FFL_licensing"
+    },
+    "political_violence_event_pressure_score": {
+      "source_family": "ACLED_events",
+      "component_family": "ACLED_events"
+    },
+    "poverty_score": {
+      "source_family": "ACS_socioeconomic",
+      "component_family": "household_stress"
+    },
+    "protest_event_pressure_score": {
+      "source_family": "ACLED_events",
+      "component_family": "ACLED_events"
+    },
+    "public_disorder_event_pressure_score": {
+      "source_family": "ACLED_events",
+      "component_family": "ACLED_events"
+    },
+    "recent_disaster_score": {
+      "source_family": "FEMA_declarations",
+      "component_family": "FEMA_disasters"
+    },
+    "rent_burden_score": {
+      "source_family": "ACS_socioeconomic",
+      "component_family": "household_stress"
+    },
+    "sex_offense_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "sporting_goods_density_score": {
+      "source_family": "CBP_business",
+      "component_family": "tactical_access"
+    },
+    "strategic_development_pressure_score": {
+      "source_family": "ACLED_events",
+      "component_family": "ACLED_events"
+    },
+    "surplus_tactical_density_score": {
+      "source_family": "optional_local_access",
+      "component_family": "tactical_access"
+    },
+    "tobacco_vape_density_score": {
+      "source_family": "CBP_business",
+      "component_family": "tobacco_retail"
+    },
+    "total_acled_event_pressure_score": {
+      "source_family": "ACLED_events",
+      "component_family": "ACLED_events"
+    },
+    "training_density_score": {
+      "source_family": "optional_local_access",
+      "component_family": "tactical_access"
+    },
+    "unemployment_score": {
+      "source_family": "ACS_socioeconomic",
+      "component_family": "household_stress"
+    },
+    "used_auto_dealer_establishments_per_10k_score": {
+      "source_family": "CBP_business",
+      "component_family": "cash_retail"
+    },
+    "used_merchandise_establishments_per_10k_score": {
+      "source_family": "CBP_business",
+      "component_family": "cash_retail"
+    },
+    "violent_crime_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    },
+    "violent_unrest_event_pressure_score": {
+      "source_family": "ACLED_events",
+      "component_family": "ACLED_events"
+    },
+    "weapons_law_violation_pressure_score": {
+      "source_family": "TBI_public_safety",
+      "component_family": "crime_weapons"
+    }
+  },
+  "saved_column_comparisons": [
+    [
+      "gang_related_total_crime_count",
+      "overall_crime_count_2024"
+    ],
+    [
+      "gang_related_total_pressure_score",
+      "overall_crime_count_pressure_score"
+    ],
+    [
+      "explosive_related_total_offense_count",
+      "gang_explosive_total_offense_count"
+    ],
+    [
+      "explosive_related_violent_offense_count",
+      "gang_explosive_violent_offense_count"
+    ],
+    [
+      "explosive_related_weapon_law_violation_count",
+      "gang_explosive_weapon_law_violation_count"
+    ],
+    [
+      "explosive_related_pressure_score",
+      "gang_explosive_pressure_score"
+    ]
+  ],
+  "large_rank_change_threshold": 10
+}
