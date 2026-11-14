@@ -1,0 +1,21 @@
+{
+  "original": {
+    "files_checked": 170,
+    "mismatches": 0
+  },
+  "frozen": {
+    "files_checked": 170,
+    "mismatches": 0
+  },
+  "release_assets": {
+    "final_report.pdf": true,
+    "START_HERE.md": true,
+    "tennessee-financial-security-risk-model-v1.0.1.zip": true,
+    "tennessee-financial-security-risk-model-v1.0.1.zip.sha256": true,
+    "verification.json": true
+  },
+  "base_commit": "4777af1c0230e354bea145cb7aa5dc59d7df2107",
+  "existing_tracked_files_changed": 0,
+  "note_sha256": "a15cc9fbf7da3db9467fbd49d6104c9111515a2aaf420274066a9ad31dc656f0",
+  "captured_utc": "2026-11-14T02:38:40.152503+00:00"
+}
