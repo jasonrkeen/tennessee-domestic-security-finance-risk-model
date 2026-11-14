@@ -1,0 +1,17 @@
+{
+  "frozen": {
+    "checked": 170,
+    "mismatches": []
+  },
+  "original": {
+    "checked": 170,
+    "mismatches": []
+  },
+  "release_assets": {
+    "final_report.pdf": true,
+    "START_HERE.md": true,
+    "tennessee-financial-security-risk-model-v1.0.1.zip": true,
+    "tennessee-financial-security-risk-model-v1.0.1.zip.sha256": true,
+    "verification.json": true
+  }
+}

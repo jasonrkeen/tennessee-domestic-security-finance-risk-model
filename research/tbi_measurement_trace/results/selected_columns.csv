@@ -1,0 +1,157 @@
+export,source_column_1based,offense,measure,weapon
+explosives,2,Murder,Number of Crimes,Explosives
+explosives,3,Negligent Manslaughter,Number of Crimes,Explosives
+explosives,4,Justifiable Homicide,Number of Crimes,Explosives
+explosives,5,Negligent Vehicular Manslaughter,Number of Crimes,Explosives
+explosives,6,Kidnapping/Abduction,Number of Crimes,Explosives
+explosives,7,All Rape,Number of Crimes,Explosives
+explosives,8,Criminal Sexual Contact,Number of Crimes,Explosives
+explosives,9,Incest,Number of Crimes,Explosives
+explosives,10,Statutory Rape,Number of Crimes,Explosives
+explosives,11,Aggravated Assault,Number of Crimes,Explosives
+explosives,12,Simple Assault,Number of Crimes,Explosives
+explosives,13,Intimidation,Number of Crimes,Explosives
+explosives,14,Stalking,Number of Crimes,Explosives
+explosives,15,Commercial Sex Acts,Number of Crimes,Explosives
+explosives,16,Involuntary Servitude,Number of Crimes,Explosives
+explosives,17,Arson,Number of Crimes,Explosives
+explosives,18,Bribery,Number of Crimes,Explosives
+explosives,19,Burglary,Number of Crimes,Explosives
+explosives,20,Counterfeiting/Forgery,Number of Crimes,Explosives
+explosives,21,Destruction/Damage/Vandalism,Number of Crimes,Explosives
+explosives,22,Embezzlement,Number of Crimes,Explosives
+explosives,23,Extortion/Blackmail,Number of Crimes,Explosives
+explosives,24,Fraud - False Pretenses,Number of Crimes,Explosives
+explosives,25,Fraud - Credit Card/ATM,Number of Crimes,Explosives
+explosives,26,Fraud - Impersonation,Number of Crimes,Explosives
+explosives,27,Fraud - Welfare,Number of Crimes,Explosives
+explosives,28,Fraud - Wire,Number of Crimes,Explosives
+explosives,29,Fraud - Identity Theft,Number of Crimes,Explosives
+explosives,30,Fraud - Computer Hacking/Invasion,Number of Crimes,Explosives
+explosives,31,Robbery,Number of Crimes,Explosives
+explosives,32,Theft - Pocket-picking,Number of Crimes,Explosives
+explosives,33,Theft - Purse Snatching,Number of Crimes,Explosives
+explosives,34,Theft - Shoplifting,Number of Crimes,Explosives
+explosives,35,Theft From Building,Number of Crimes,Explosives
+explosives,36,Theft From Coin Machine,Number of Crimes,Explosives
+explosives,37,Theft From Motor Vehicle,Number of Crimes,Explosives
+explosives,38,Theft of Motor Vehicle Parts,Number of Crimes,Explosives
+explosives,39,Theft - All Other Larceny,Number of Crimes,Explosives
+explosives,40,Motor Vehicle Theft,Number of Crimes,Explosives
+explosives,41,Stolen Property Offenses,Number of Crimes,Explosives
+explosives,42,Animal Cruelty,Number of Crimes,Explosives
+explosives,43,Drug/Narcotic Violations,Number of Crimes,Explosives
+explosives,44,Drug/Narcotic Equipment Violations,Number of Crimes,Explosives
+explosives,45,Gambling - Betting/Wagering,Number of Crimes,Explosives
+explosives,46,Gambling - Operating/Promoting,Number of Crimes,Explosives
+explosives,47,Gambling - Equipment Violations,Number of Crimes,Explosives
+explosives,48,Gambling - Sports Tampering,Number of Crimes,Explosives
+explosives,49,Pornography/Obscene Material,Number of Crimes,Explosives
+explosives,50,Prostitution,Number of Crimes,Explosives
+explosives,51,Prostitution Assisting/Promoting,Number of Crimes,Explosives
+explosives,52,Purchasing Prostitution,Number of Crimes,Explosives
+explosives,53,Weapon Law Violations,Number of Crimes,Explosives
+gang_explosives,2,Murder,Number of Crimes,Explosives
+gang_explosives,3,Negligent Manslaughter,Number of Crimes,Explosives
+gang_explosives,4,Justifiable Homicide,Number of Crimes,Explosives
+gang_explosives,5,Negligent Vehicular Manslaughter,Number of Crimes,Explosives
+gang_explosives,6,Kidnapping/Abduction,Number of Crimes,Explosives
+gang_explosives,7,All Rape,Number of Crimes,Explosives
+gang_explosives,8,Criminal Sexual Contact,Number of Crimes,Explosives
+gang_explosives,9,Incest,Number of Crimes,Explosives
+gang_explosives,10,Statutory Rape,Number of Crimes,Explosives
+gang_explosives,11,Aggravated Assault,Number of Crimes,Explosives
+gang_explosives,12,Simple Assault,Number of Crimes,Explosives
+gang_explosives,13,Intimidation,Number of Crimes,Explosives
+gang_explosives,14,Stalking,Number of Crimes,Explosives
+gang_explosives,15,Commercial Sex Acts,Number of Crimes,Explosives
+gang_explosives,16,Involuntary Servitude,Number of Crimes,Explosives
+gang_explosives,17,Arson,Number of Crimes,Explosives
+gang_explosives,18,Bribery,Number of Crimes,Explosives
+gang_explosives,19,Burglary,Number of Crimes,Explosives
+gang_explosives,20,Counterfeiting/Forgery,Number of Crimes,Explosives
+gang_explosives,21,Destruction/Damage/Vandalism,Number of Crimes,Explosives
+gang_explosives,22,Embezzlement,Number of Crimes,Explosives
+gang_explosives,23,Extortion/Blackmail,Number of Crimes,Explosives
+gang_explosives,24,Fraud - False Pretenses,Number of Crimes,Explosives
+gang_explosives,25,Fraud - Credit Card/ATM,Number of Crimes,Explosives
+gang_explosives,26,Fraud - Impersonation,Number of Crimes,Explosives
+gang_explosives,27,Fraud - Welfare,Number of Crimes,Explosives
+gang_explosives,28,Fraud - Wire,Number of Crimes,Explosives
+gang_explosives,29,Fraud - Identity Theft,Number of Crimes,Explosives
+gang_explosives,30,Fraud - Computer Hacking/Invasion,Number of Crimes,Explosives
+gang_explosives,31,Robbery,Number of Crimes,Explosives
+gang_explosives,32,Theft - Pocket-picking,Number of Crimes,Explosives
+gang_explosives,33,Theft - Purse Snatching,Number of Crimes,Explosives
+gang_explosives,34,Theft - Shoplifting,Number of Crimes,Explosives
+gang_explosives,35,Theft From Building,Number of Crimes,Explosives
+gang_explosives,36,Theft From Coin Machine,Number of Crimes,Explosives
+gang_explosives,37,Theft From Motor Vehicle,Number of Crimes,Explosives
+gang_explosives,38,Theft of Motor Vehicle Parts,Number of Crimes,Explosives
+gang_explosives,39,Theft - All Other Larceny,Number of Crimes,Explosives
+gang_explosives,40,Motor Vehicle Theft,Number of Crimes,Explosives
+gang_explosives,41,Stolen Property Offenses,Number of Crimes,Explosives
+gang_explosives,42,Animal Cruelty,Number of Crimes,Explosives
+gang_explosives,43,Drug/Narcotic Violations,Number of Crimes,Explosives
+gang_explosives,44,Drug/Narcotic Equipment Violations,Number of Crimes,Explosives
+gang_explosives,45,Gambling - Betting/Wagering,Number of Crimes,Explosives
+gang_explosives,46,Gambling - Operating/Promoting,Number of Crimes,Explosives
+gang_explosives,47,Gambling - Equipment Violations,Number of Crimes,Explosives
+gang_explosives,48,Gambling - Sports Tampering,Number of Crimes,Explosives
+gang_explosives,49,Pornography/Obscene Material,Number of Crimes,Explosives
+gang_explosives,50,Prostitution,Number of Crimes,Explosives
+gang_explosives,51,Prostitution Assisting/Promoting,Number of Crimes,Explosives
+gang_explosives,52,Purchasing Prostitution,Number of Crimes,Explosives
+gang_explosives,53,Weapon Law Violations,Number of Crimes,Explosives
+gang,2,Murder,Number of Crimes,
+gang,3,Negligent Manslaughter,Number of Crimes,
+gang,4,Justifiable Homicide,Number of Crimes,
+gang,5,Negligent Vehicular Manslaughter,Number of Crimes,
+gang,6,Kidnapping/Abduction,Number of Crimes,
+gang,7,All Rape,Number of Crimes,
+gang,8,Criminal Sexual Contact,Number of Crimes,
+gang,9,Incest,Number of Crimes,
+gang,10,Statutory Rape,Number of Crimes,
+gang,11,Aggravated Assault,Number of Crimes,
+gang,12,Simple Assault,Number of Crimes,
+gang,13,Intimidation,Number of Crimes,
+gang,14,Stalking,Number of Crimes,
+gang,15,Commercial Sex Acts,Number of Crimes,
+gang,16,Involuntary Servitude,Number of Crimes,
+gang,17,Arson,Number of Crimes,
+gang,18,Bribery,Number of Crimes,
+gang,19,Burglary,Number of Crimes,
+gang,20,Counterfeiting/Forgery,Number of Crimes,
+gang,21,Destruction/Damage/Vandalism,Number of Crimes,
+gang,22,Embezzlement,Number of Crimes,
+gang,23,Extortion/Blackmail,Number of Crimes,
+gang,24,Fraud - False Pretenses,Number of Crimes,
+gang,25,Fraud - Credit Card/ATM,Number of Crimes,
+gang,26,Fraud - Impersonation,Number of Crimes,
+gang,27,Fraud - Welfare,Number of Crimes,
+gang,28,Fraud - Wire,Number of Crimes,
+gang,29,Fraud - Identity Theft,Number of Crimes,
+gang,30,Fraud - Computer Hacking/Invasion,Number of Crimes,
+gang,31,Robbery,Number of Crimes,
+gang,32,Theft - Pocket-picking,Number of Crimes,
+gang,33,Theft - Purse Snatching,Number of Crimes,
+gang,34,Theft - Shoplifting,Number of Crimes,
+gang,35,Theft From Building,Number of Crimes,
+gang,36,Theft From Coin Machine,Number of Crimes,
+gang,37,Theft From Motor Vehicle,Number of Crimes,
+gang,38,Theft of Motor Vehicle Parts,Number of Crimes,
+gang,39,Theft - All Other Larceny,Number of Crimes,
+gang,40,Motor Vehicle Theft,Number of Crimes,
+gang,41,Stolen Property Offenses,Number of Crimes,
+gang,42,Animal Cruelty,Number of Crimes,
+gang,43,Drug/Narcotic Violations,Number of Crimes,
+gang,44,Drug/Narcotic Equipment Violations,Number of Crimes,
+gang,45,Gambling - Betting/Wagering,Number of Crimes,
+gang,46,Gambling - Operating/Promoting,Number of Crimes,
+gang,47,Gambling - Equipment Violations,Number of Crimes,
+gang,48,Gambling - Sports Tampering,Number of Crimes,
+gang,49,Pornography/Obscene Material,Number of Crimes,
+gang,50,Prostitution,Number of Crimes,
+gang,51,Prostitution Assisting/Promoting,Number of Crimes,
+gang,52,Purchasing Prostitution,Number of Crimes,
+gang,53,Weapon Law Violations,Number of Crimes,

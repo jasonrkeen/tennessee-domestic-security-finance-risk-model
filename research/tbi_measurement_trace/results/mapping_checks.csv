@@ -1,0 +1,4 @@
+export,selected_offenses,saved_mapping_rows,offense_labels_match,gang_activity_filter,weapon_force_filter,caution
+explosives,52,52,True,,Explosives,"Mapping filter labels are code literals, not independent filter validation"
+gang_explosives,52,52,True,All Gang Activities,Explosives,"Mapping filter labels are code literals, not independent filter validation"
+gang,52,52,True,All Gang Activities,,"Mapping filter labels are code literals, not independent filter validation"
